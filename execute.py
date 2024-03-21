@@ -73,7 +73,9 @@ def register_particle(addr):
     """This function inits the particle."""
     url = f"{node_url}/register_particle"
     response = requests.post(url, timeout=10, json={"address": addr})
-    if response.status_code != 200:
+    if response.status_code == 500:
+        raise Exception(f"No task available: Try later.")
+    elif response.status_code != 200:
         raise Exception(f"Failed to init particle: Try later.")
     task = response.json()
     return task['args']
