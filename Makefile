@@ -13,15 +13,9 @@ ifndef addr
 endif
 	@echo "----------------------------------"
 	@echo "Starting Process for Address $(addr)"
-	
+
 	source ./nimenv_localminers/bin/activate && \
-	python execute.py $(addr)
-	
+	python execute.py $(addr) $(gpu)
+
 	@echo "Process Completed for Address $(addr)"
 	@echo "----------------------------------"
-
-
-
-
-
-
