@@ -91,9 +91,9 @@ source ./nimenv_localminers/bin/activate
 ```
 
 ### Start Mining
-Replace the <wallet_address> by your Nimble wallet address on the command below.
+Replace the <wallet_address> by your Nimble wallet address (“nimblexxx”) on the command below.
 ```
-make run addr=<copy paste your “nimblexxx” wallet address here>
+make run addr=<wallet_address>
 ```
 
 Congratulations ! You are now mining $NIM!
