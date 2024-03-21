@@ -1,0 +1,462 @@
+2024-03-21 13:56:30.373 | INFO     | __main__:<module>:22 - Initializing at https://mainnet.nimble.technology:443
+Using address: nimble1540na7xdxzcdp75jprmcjt2guf8cwhrrhvcm84
+2024-03-21 13:56:30.373 | INFO     | __main__:perform:139 - Perform Task
+2024-03-21 13:56:40.383 | INFO     | __main__:register_particle:103 - Registering particle
+2024-03-21 13:56:40.639 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 13:56:50.651 | INFO     | __main__:register_particle:103 - Registering particle
+2024-03-21 13:56:50.912 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 13:57:00.924 | INFO     | __main__:register_particle:103 - Registering particle
+2024-03-21 13:57:01.180 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 13:57:11.191 | INFO     | __main__:register_particle:103 - Registering particle
+2024-03-21 13:57:11.452 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 13:57:21.464 | INFO     | __main__:register_particle:103 - Registering particle
+2024-03-21 13:57:21.767 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 13:57:31.778 | INFO     | __main__:register_particle:103 - Registering particle
+2024-03-21 13:57:32.030 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 13:57:42.041 | INFO     | __main__:register_particle:103 - Registering particle
+2024-03-21 13:57:42.304 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 13:57:52.315 | INFO     | __main__:register_particle:103 - Registering particle
+2024-03-21 13:57:52.581 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 13:58:02.592 | INFO     | __main__:register_particle:103 - Registering particle
+2024-03-21 13:58:02.844 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 13:58:12.855 | INFO     | __main__:register_particle:103 - Registering particle
+2024-03-21 13:58:13.126 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 13:58:23.138 | INFO     | __main__:register_particle:103 - Registering particle
+2024-03-21 13:58:23.430 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 13:58:33.442 | INFO     | __main__:register_particle:103 - Registering particle
+2024-03-21 13:58:33.683 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 13:58:43.694 | INFO     | __main__:register_particle:103 - Registering particle
+2024-03-21 13:58:43.949 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 13:58:53.960 | INFO     | __main__:register_particle:103 - Registering particle
+2024-03-21 13:58:54.218 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 13:59:04.229 | INFO     | __main__:register_particle:103 - Registering particle
+2024-03-21 13:59:04.475 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 13:59:17.612 | INFO     | __main__:<module>:22 - Initializing at https://mainnet.nimble.technology:443
+Using address: nimble1540na7xdxzcdp75jprmcjt2guf8cwhrrhvcm84
+2024-03-21 13:59:17.612 | INFO     | __main__:perform:143 - Perform Task
+2024-03-21 13:59:27.622 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 13:59:27.936 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 13:59:37.948 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 13:59:38.212 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 13:59:48.223 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 13:59:48.497 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 13:59:58.508 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 13:59:58.805 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:00:08.816 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:00:09.065 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:00:19.076 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:00:19.339 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:00:29.350 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:00:29.640 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:00:39.651 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:00:39.913 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:00:49.924 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:00:50.183 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:01:00.194 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:01:00.467 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:01:10.479 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:01:10.729 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:01:20.740 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:01:20.995 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:01:31.006 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:01:31.380 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:01:41.391 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:01:41.657 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:01:51.669 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:01:51.936 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:02:01.947 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:02:02.196 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:02:12.207 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:02:12.469 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:02:22.480 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:02:22.737 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:02:32.748 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:02:33.100 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:02:43.112 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:02:43.364 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:02:53.374 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:02:53.627 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:03:03.638 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:03:03.907 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:03:13.918 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:03:14.184 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:03:24.195 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:03:24.464 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:03:34.475 | INFO     | __main__:register_particle:107 - Registering particle
+2024-03-21 14:03:34.788 | INFO     | __main__:execute:34 - Executing task
+2024-03-21 14:03:48.116 | INFO     | __main__:<module>:22 - Initializing at https://mainnet.nimble.technology:443
+Using address: nimble1540na7xdxzcdp75jprmcjt2guf8cwhrrhvcm84
+2024-03-21 14:03:48.116 | INFO     | __main__:perform:164 - Perform Task
+2024-03-21 14:03:58.126 | INFO     | __main__:register_particle:128 - Registering particle
+2024-03-21 14:03:58.379 | INFO     | __main__:execute:35 - Executing task
+2024-03-21 14:04:08.391 | INFO     | __main__:register_particle:128 - Registering particle
+2024-03-21 14:04:08.656 | INFO     | __main__:execute:35 - Executing task
+2024-03-21 14:04:18.667 | INFO     | __main__:register_particle:128 - Registering particle
+2024-03-21 14:04:18.918 | INFO     | __main__:execute:35 - Executing task
+2024-03-21 14:04:28.929 | INFO     | __main__:register_particle:128 - Registering particle
+2024-03-21 14:04:29.180 | INFO     | __main__:execute:35 - Executing task
+2024-03-21 14:04:39.191 | INFO     | __main__:register_particle:128 - Registering particle
+2024-03-21 14:04:39.490 | INFO     | __main__:execute:35 - Executing task
+2024-03-21 14:04:49.501 | INFO     | __main__:register_particle:128 - Registering particle
+2024-03-21 14:04:49.754 | INFO     | __main__:execute:35 - Executing task
+2024-03-21 14:04:59.765 | INFO     | __main__:register_particle:128 - Registering particle
+2024-03-21 14:05:00.030 | INFO     | __main__:execute:35 - Executing task
+2024-03-21 14:05:10.041 | INFO     | __main__:register_particle:128 - Registering particle
+2024-03-21 14:05:10.299 | INFO     | __main__:execute:35 - Executing task
+2024-03-21 14:05:20.310 | INFO     | __main__:register_particle:128 - Registering particle
+2024-03-21 14:05:20.616 | INFO     | __main__:execute:35 - Executing task
+2024-03-21 14:05:30.628 | INFO     | __main__:register_particle:128 - Registering particle
+2024-03-21 14:05:30.891 | INFO     | __main__:execute:35 - Executing task
+2024-03-21 14:05:40.902 | INFO     | __main__:register_particle:128 - Registering particle
+2024-03-21 14:05:41.165 | INFO     | __main__:execute:35 - Executing task
+2024-03-21 14:05:51.177 | INFO     | __main__:register_particle:128 - Registering particle
+2024-03-21 14:05:51.397 | INFO     | __main__:execute:35 - Executing task
+2024-03-21 14:06:01.409 | INFO     | __main__:register_particle:128 - Registering particle
+2024-03-21 14:06:01.627 | INFO     | __main__:execute:35 - Executing task
+2024-03-21 14:06:11.638 | INFO     | __main__:register_particle:128 - Registering particle
+2024-03-21 14:06:11.860 | INFO     | __main__:execute:35 - Executing task
+2024-03-21 14:06:21.872 | INFO     | __main__:register_particle:128 - Registering particle
+2024-03-21 14:06:22.097 | INFO     | __main__:execute:35 - Executing task
+2024-03-21 14:06:35.146 | INFO     | __main__:<module>:22 - Initializing at https://mainnet.nimble.technology:443
+Using address: nimble1540na7xdxzcdp75jprmcjt2guf8cwhrrhvcm84
+2024-03-21 14:06:35.147 | INFO     | __main__:perform:171 - Performing Task
+2024-03-21 14:06:45.158 | INFO     | __main__:register_particle:132 - Registering particle
+2024-03-21 14:06:45.440 | INFO     | __main__:execute:37 - Executing task
+2024-03-21 14:06:45.441 | ERROR    | __main__:perform:183 - An error has been caught in function 'perform', process 'MainProcess' (3318215), thread 'MainThread' (139764437242304):
+Traceback (most recent call last):
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 193, in <module>
+    perform()
+    └ <function perform at 0x7f1c1232e3b0>
+
+> File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 183, in perform
+    execute(task_args)
+    │       └ None
+    └ <function execute at 0x7f1c1232e170>
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 41, in execute
+    tokenizer = AutoTokenizer.from_pretrained(task_args["model_name"])
+                │             │               └ None
+                │             └ <classmethod(<function AutoTokenizer.from_pretrained at 0x7f1c126fea70>)>
+                └ <class 'transformers.models.auto.tokenization_auto.AutoTokenizer'>
+
+TypeError: 'NoneType' object is not subscriptable
+2024-03-21 14:06:45.445 | INFO     | __main__:complete_task:147 - Final step
+2024-03-21 14:08:28.106 | INFO     | __main__:<module>:22 - Initializing at https://mainnet.nimble.technology:443
+Using address: nimble1540na7xdxzcdp75jprmcjt2guf8cwhrrhvcm84
+2024-03-21 14:08:28.106 | INFO     | __main__:perform:171 - Performing Task
+2024-03-21 14:08:38.117 | INFO     | __main__:register_particle:132 - Registering particle
+2024-03-21 14:08:38.444 | INFO     | __main__:execute:37 - Executing task
+2024-03-21 14:08:38.445 | ERROR    | __main__:perform:183 - An error has been caught in function 'perform', process 'MainProcess' (3320263), thread 'MainThread' (139735949656512):
+Traceback (most recent call last):
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 193, in <module>
+    perform()
+    └ <function perform at 0x7f15743823b0>
+
+> File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 183, in perform
+    execute(task_args)
+    │       └ None
+    └ <function execute at 0x7f1574382170>
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 41, in execute
+    tokenizer = AutoTokenizer.from_pretrained(model)
+                │             └ <classmethod(<function AutoTokenizer.from_pretrained at 0x7f157474ea70>)>
+                └ <class 'transformers.models.auto.tokenization_auto.AutoTokenizer'>
+
+UnboundLocalError: local variable 'model' referenced before assignment
+2024-03-21 14:08:38.449 | INFO     | __main__:complete_task:147 - Final step
+2024-03-21 14:08:48.460 | INFO     | __main__:register_particle:132 - Registering particle
+2024-03-21 14:08:48.714 | INFO     | __main__:execute:37 - Executing task
+2024-03-21 14:08:48.716 | ERROR    | __main__:perform:183 - An error has been caught in function 'perform', process 'MainProcess' (3320263), thread 'MainThread' (139735949656512):
+Traceback (most recent call last):
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 193, in <module>
+    perform()
+    └ <function perform at 0x7f15743823b0>
+
+> File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 183, in perform
+    execute(task_args)
+    │       └ None
+    └ <function execute at 0x7f1574382170>
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 41, in execute
+    tokenizer = AutoTokenizer.from_pretrained(model)
+                │             └ <classmethod(<function AutoTokenizer.from_pretrained at 0x7f157474ea70>)>
+                └ <class 'transformers.models.auto.tokenization_auto.AutoTokenizer'>
+
+UnboundLocalError: local variable 'model' referenced before assignment
+2024-03-21 14:08:48.719 | INFO     | __main__:complete_task:147 - Final step
+2024-03-21 14:08:56.593 | INFO     | __main__:<module>:22 - Initializing at https://mainnet.nimble.technology:443
+Using address: nimble1540na7xdxzcdp75jprmcjt2guf8cwhrrhvcm84
+2024-03-21 14:08:56.594 | INFO     | __main__:perform:171 - Performing Task
+2024-03-21 14:09:06.604 | INFO     | __main__:register_particle:132 - Registering particle
+2024-03-21 14:09:06.865 | INFO     | __main__:execute:37 - Executing task
+2024-03-21 14:09:07.065 | ERROR    | __main__:perform:183 - An error has been caught in function 'perform', process 'MainProcess' (3321255), thread 'MainThread' (140349270589888):
+Traceback (most recent call last):
+
+  File "/home/bakobi/.local/lib/python3.10/site-packages/huggingface_hub/utils/_errors.py", line 304, in hf_raise_for_status
+    response.raise_for_status()
+    │        └ <function Response.raise_for_status at 0x7fa4fa7331c0>
+    └ <Response [404]>
+  File "/usr/local/lib/python3.10/dist-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+          │         │                        └ <Response [404]>
+          │         └ '404 Client Error: Not Found for url: https://huggingface.co/bert-based-uncased/resolve/main/tokenizer_config.json'
+          └ <class 'requests.exceptions.HTTPError'>
+
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://huggingface.co/bert-based-uncased/resolve/main/tokenizer_config.json
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/home/bakobi/.local/lib/python3.10/site-packages/transformers/utils/hub.py", line 398, in cached_file
+    resolved_file = hf_hub_download(
+                    └ <function hf_hub_download at 0x7fa43eeba170>
+  File "/home/bakobi/.local/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 118, in _inner_fn
+    return fn(*args, **kwargs)
+           │   │       └ {'subfolder': None, 'repo_type': None, 'revision': None, 'cache_dir': '/home/bakobi/.cache/huggingface/hub', 'user_agent': 't...
+           │   └ ('bert-based-uncased', 'tokenizer_config.json')
+           └ <function hf_hub_download at 0x7fa43eeba0e0>
+  File "/home/bakobi/.local/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1403, in hf_hub_download
+    raise head_call_error
+          └ RepositoryNotFoundError('404 Client Error. (Request ID: Root=1-65fc3f83-2575defd70e9c5fa59e6b234;135d5a86-e958-4eb0-b3b3-7d6e...
+  File "/home/bakobi/.local/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1261, in hf_hub_download
+    metadata = get_hf_file_metadata(
+               └ <function get_hf_file_metadata at 0x7fa43eeba3b0>
+  File "/home/bakobi/.local/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 118, in _inner_fn
+    return fn(*args, **kwargs)
+           │   │       └ {'url': 'https://huggingface.co/bert-based-uncased/resolve/main/tokenizer_config.json', 'token': None, 'proxies': None, 'time...
+           │   └ ()
+           └ <function get_hf_file_metadata at 0x7fa43eeba320>
+  File "/home/bakobi/.local/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1667, in get_hf_file_metadata
+    r = _request_wrapper(
+        └ <function _request_wrapper at 0x7fa43eeb9990>
+  File "/home/bakobi/.local/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 385, in _request_wrapper
+    response = _request_wrapper(
+               └ <function _request_wrapper at 0x7fa43eeb9990>
+  File "/home/bakobi/.local/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 409, in _request_wrapper
+    hf_raise_for_status(response)
+    │                   └ <Response [404]>
+    └ <function hf_raise_for_status at 0x7fa43ee2c5e0>
+  File "/home/bakobi/.local/lib/python3.10/site-packages/huggingface_hub/utils/_errors.py", line 352, in hf_raise_for_status
+    raise RepositoryNotFoundError(message, response) from e
+          │                       │        └ <Response [404]>
+          │                       └ '404 Client Error.\n\nRepository Not Found for url: https://huggingface.co/bert-based-uncased/resolve/main/tokenizer_config.j...
+          └ <class 'huggingface_hub.utils._errors.RepositoryNotFoundError'>
+
+huggingface_hub.utils._errors.RepositoryNotFoundError: 404 Client Error. (Request ID: Root=1-65fc3f83-2575defd70e9c5fa59e6b234;135d5a86-e958-4eb0-b3b3-7d6e495c4369)
+
+Repository Not Found for url: https://huggingface.co/bert-based-uncased/resolve/main/tokenizer_config.json.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated.
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 193, in <module>
+    perform()
+    └ <function perform at 0x7fa43cfea3b0>
+
+> File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 183, in perform
+    execute(task_args)
+    │       └ None
+    └ <function execute at 0x7fa43cfea170>
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 41, in execute
+    tokenizer = AutoTokenizer.from_pretrained(MODEL)
+                │             │               └ 'bert-based-uncased'
+                │             └ <classmethod(<function AutoTokenizer.from_pretrained at 0x7fa43d3bea70>)>
+                └ <class 'transformers.models.auto.tokenization_auto.AutoTokenizer'>
+
+  File "/home/bakobi/.local/lib/python3.10/site-packages/transformers/models/auto/tokenization_auto.py", line 779, in from_pretrained
+    tokenizer_config = get_tokenizer_config(pretrained_model_name_or_path, **kwargs)
+                       │                    │                                └ {'_from_auto': True}
+                       │                    └ 'bert-based-uncased'
+                       └ <function get_tokenizer_config at 0x7fa43d3be710>
+  File "/home/bakobi/.local/lib/python3.10/site-packages/transformers/models/auto/tokenization_auto.py", line 612, in get_tokenizer_config
+    resolved_config_file = cached_file(
+                           └ <function cached_file at 0x7fa43dd484c0>
+  File "/home/bakobi/.local/lib/python3.10/site-packages/transformers/utils/hub.py", line 421, in cached_file
+    raise EnvironmentError(
+
+OSError: bert-based-uncased is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `huggingface-cli login` or by passing `token=<your_token>`
+2024-03-21 14:09:07.079 | INFO     | __main__:complete_task:147 - Final step
+2024-03-21 14:11:16.067 | INFO     | __main__:<module>:22 - Initializing at https://mainnet.nimble.technology:443
+Using address: nimble1540na7xdxzcdp75jprmcjt2guf8cwhrrhvcm84
+2024-03-21 14:11:16.068 | INFO     | __main__:perform:171 - Performing Task
+2024-03-21 14:11:26.078 | INFO     | __main__:register_particle:132 - Registering particle
+2024-03-21 14:11:26.393 | INFO     | __main__:execute:37 - Executing task
+2024-03-21 14:11:27.444 | ERROR    | __main__:execute:58 - Error during loading of the model 'NoneType' object is not subscriptable
+2024-03-21 14:11:27.444 | ERROR    | __main__:perform:183 - An error has been caught in function 'perform', process 'MainProcess' (3323773), thread 'MainThread' (140316071121344):
+Traceback (most recent call last):
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 52, in execute
+    task_args["model_name"], num_labels=task_args["num_labels"]
+    │                                   └ None
+    └ None
+
+TypeError: 'NoneType' object is not subscriptable
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 193, in <module>
+    perform()
+    └ <function perform at 0x7f9ddbee3760>
+
+> File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 183, in perform
+    execute(task_args)
+    │       └ None
+    └ <function execute at 0x7f9ddbee3520>
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 59, in execute
+    raise Exception(f"Error during loading of the model")
+
+Exception: Error during loading of the model
+2024-03-21 14:11:27.450 | INFO     | __main__:complete_task:147 - Final step
+2024-03-21 14:11:37.461 | INFO     | __main__:register_particle:132 - Registering particle
+2024-03-21 14:11:37.727 | INFO     | __main__:execute:37 - Executing task
+2024-03-21 14:11:37.846 | ERROR    | __main__:execute:58 - Error during loading of the model 'NoneType' object is not subscriptable
+2024-03-21 14:11:37.847 | ERROR    | __main__:perform:183 - An error has been caught in function 'perform', process 'MainProcess' (3323773), thread 'MainThread' (140316071121344):
+Traceback (most recent call last):
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 52, in execute
+    task_args["model_name"], num_labels=task_args["num_labels"]
+    │                                   └ None
+    └ None
+
+TypeError: 'NoneType' object is not subscriptable
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 193, in <module>
+    perform()
+    └ <function perform at 0x7f9ddbee3760>
+
+> File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 183, in perform
+    execute(task_args)
+    │       └ None
+    └ <function execute at 0x7f9ddbee3520>
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 59, in execute
+    raise Exception(f"Error during loading of the model")
+
+Exception: Error during loading of the model
+2024-03-21 14:11:37.852 | INFO     | __main__:complete_task:147 - Final step
+2024-03-21 14:12:26.783 | INFO     | __main__:<module>:22 - Initializing at https://mainnet.nimble.technology:443
+Using address: nimble1540na7xdxzcdp75jprmcjt2guf8cwhrrhvcm84
+2024-03-21 14:12:26.783 | INFO     | __main__:perform:171 - Performing Task
+2024-03-21 14:12:36.793 | INFO     | __main__:register_particle:132 - Registering particle
+2024-03-21 14:12:37.176 | INFO     | __main__:execute:37 - Executing task
+2024-03-21 14:12:37.450 | ERROR    | __main__:execute:58 - Error during loading of the model 'NoneType' object is not subscriptable
+2024-03-21 14:12:37.450 | ERROR    | __main__:perform:183 - An error has been caught in function 'perform', process 'MainProcess' (3325011), thread 'MainThread' (139696772719040):
+Traceback (most recent call last):
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 52, in execute
+    task_args["model_name"], num_labels=task_args["num_labels"]
+    │                                   └ None
+    └ None
+
+TypeError: 'NoneType' object is not subscriptable
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 193, in <module>
+    perform()
+    └ <function perform at 0x7f0daacd3760>
+
+> File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 183, in perform
+    execute(task_args)
+    │       └ None
+    └ <function execute at 0x7f0daacd3520>
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 59, in execute
+    raise Exception(f"Error during loading of the model")
+
+Exception: Error during loading of the model
+2024-03-21 14:12:37.457 | INFO     | __main__:complete_task:147 - Final step
+2024-03-21 14:12:47.468 | INFO     | __main__:register_particle:132 - Registering particle
+2024-03-21 14:12:47.739 | INFO     | __main__:execute:37 - Executing task
+2024-03-21 14:12:47.857 | ERROR    | __main__:execute:58 - Error during loading of the model 'NoneType' object is not subscriptable
+2024-03-21 14:12:47.857 | ERROR    | __main__:perform:183 - An error has been caught in function 'perform', process 'MainProcess' (3325011), thread 'MainThread' (139696772719040):
+Traceback (most recent call last):
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 52, in execute
+    task_args["model_name"], num_labels=task_args["num_labels"]
+    │                                   └ None
+    └ None
+
+TypeError: 'NoneType' object is not subscriptable
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 193, in <module>
+    perform()
+    └ <function perform at 0x7f0daacd3760>
+
+> File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 183, in perform
+    execute(task_args)
+    │       └ None
+    └ <function execute at 0x7f0daacd3520>
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 59, in execute
+    raise Exception(f"Error during loading of the model")
+
+Exception: Error during loading of the model
+2024-03-21 14:12:47.863 | INFO     | __main__:complete_task:147 - Final step
+2024-03-21 14:12:57.874 | INFO     | __main__:register_particle:132 - Registering particle
+2024-03-21 14:12:58.141 | INFO     | __main__:execute:37 - Executing task
+2024-03-21 14:12:58.274 | ERROR    | __main__:execute:58 - Error during loading of the model 'NoneType' object is not subscriptable
+2024-03-21 14:12:58.275 | ERROR    | __main__:perform:183 - An error has been caught in function 'perform', process 'MainProcess' (3325011), thread 'MainThread' (139696772719040):
+Traceback (most recent call last):
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 52, in execute
+    task_args["model_name"], num_labels=task_args["num_labels"]
+    │                                   └ None
+    └ None
+
+TypeError: 'NoneType' object is not subscriptable
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 193, in <module>
+    perform()
+    └ <function perform at 0x7f0daacd3760>
+
+> File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 183, in perform
+    execute(task_args)
+    │       └ None
+    └ <function execute at 0x7f0daacd3520>
+
+  File "/home/bakobi/nimble/nimble-miner-public/execute.py", line 59, in execute
+    raise Exception(f"Error during loading of the model")
+
+Exception: Error during loading of the model
+2024-03-21 14:12:58.281 | INFO     | __main__:complete_task:147 - Final step
