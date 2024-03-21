@@ -98,23 +98,31 @@ def complete_task(wallet_address):
 
 
 def perform():
+
+    #Checks if the address is provided
+    if (len(sys.argv) < 2) or (addr is None):
+        print_in_color("Error: Address not provided.", "\033[31m")
+        return
     addr = sys.argv[1] 
-    if addr is not None:
-        print_in_color(f"Address {addr} started to work.", "\033[33m")
-        while True:
-            try:
-                print_in_color(f"Preparing", "\033[33m")
-                time.sleep(10)
-                task_args = register_particle(addr)
-                print_in_color(f"Address {addr} received the task.", "\033[33m")
-                execute(task_args)
-                print_in_color(f"Address {addr} executed the task.", "\033[32m")
-                complete_task(addr)
-                print_in_color(f"Address {addr} completed the task. ", "\033[32m")
-            except Exception as e:
-                print_in_color(f"Error: {e}", "\033[31m")
-    else:
-        print_in_color("Address not provided.", "\033[31m")
+
+    #Checks if the addr starts with nimble1 and is 45 characters long
+    if (not addr.startswith("nimble1")) or (len(addr) != 45):
+        print_in_color("Error: Invalid address.", "\033[31m")
+        return
+
+    print_in_color(f"Address {addr} started to work.", "\033[33m")
+    while True:
+        try:
+            print_in_color(f"Preparing", "\033[33m")
+            time.sleep(10)
+            task_args = register_particle(addr)
+            print_in_color(f"Address {addr} received the task.", "\033[33m")
+            execute(task_args)
+            print_in_color(f"Address {addr} executed the task.", "\033[32m")
+            complete_task(addr)
+            print_in_color(f"Address {addr} completed the task. ", "\033[32m")
+        except Exception as e:
+            print_in_color(f"Error: {e}", "\033[31m")
     
 if __name__ == "__main__":
     perform()
