@@ -12,17 +12,14 @@ from transformers import (AutoModelForSequenceClassification, AutoTokenizer,
                           Trainer, TrainingArguments)
 from loguru import logger
 
-node_url = "https://mainnet.nimble.technology:443"
+NODE_URL = "https://mainnet.nimble.technology:443"
+MODEL = "google-bert/bert-base-uncased"
 
 
-
-def logger_info(message):
-    return message.record("INFO")
-
-logger.add("output.log", filter=logger_info)
+logger.add("output.log")
 
 
-def logger.info(f"Initializing at {node_url}\nUsing address: {sys.args[0]}")
+logger.info(f"Initializing at {NODE_URL}\nUsing address: {sys.argv[1]}")
 
 def compute_metrics(eval_pred):
     logger.info("Computing metrics")
@@ -33,12 +30,15 @@ def compute_metrics(eval_pred):
         "accuracy": (predictions == labels).astype(np.float32).mean().item()
     }
 
+
+@logger.catch()
 def execute(task_args):
-    logger.info("Executing task")
     """This function executes the task."""
+    logger.info("Executing task")
+    
     print_in_color("Starting training...", "\033[34m")  # Blue for start
 
-    tokenizer = AutoTokenizer.from_pretrained(task_args["model_name"])
+    tokenizer = AutoTokenizer.from_pretrained(MODEL)
 
     def tokenize_function(examples):
         logger.info("Tokenizing task")
@@ -46,12 +46,19 @@ def execute(task_args):
             examples["text"], padding="max_length", truncation=True
         )
 
-    model = AutoModelForSequenceClassification.from_pretrained(
-        task_args["model_name"], num_labels=task_args["num_labels"]
-    )
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model.to(device)
-    logger.info(f"loading on {device}" )
+    try: 
+
+        model = AutoModelForSequenceClassification.from_pretrained(
+            task_args["model_name"], num_labels=task_args["num_labels"]
+        )
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        model.to(device)
+
+    except Exception as error:
+        logger.error(f"Error during loading of the model {error}")
+        raise Exception(f"Error during loading of the model")
+    
+    logger.info(f"Model loaded on {device}" )
 
     dataset = load_dataset(task_args["dataset_name"])
     logger.debug(dataset)
@@ -64,31 +71,48 @@ def execute(task_args):
 {task_args["seed"]}
 {task_args["num_rows"]}
 """)
+    
     if not tokenized_datasets:
         raise ValueError("Datasets not loaded correctly!")
-    small_train_dataset = (
-        tokenized_datasets["training"].shuffle(seed=task_args["seed"]).select(range(task_args["num_rows"]))
-    )
-    logger.info("Tokenization complete")
-    logger.info("Tokenizing evaluating run")
-    small_eval_dataset = (
-        tokenized_datasets["test"].shuffle(seed=task_args["seed"]).select(range(task_args["num_rows"]))
-    )
+
+    try:
+        small_train_dataset = (
+            tokenized_datasets["training"].shuffle(seed=task_args["seed"]).select(range(task_args["num_rows"]))
+        )
+        logger.info("Tokenization complete")
+        logger.info("Tokenizing evaluating run")
+        small_eval_dataset = (
+            tokenized_datasets["test"].shuffle(seed=task_args["seed"]).select(range(task_args["num_rows"]))
+        )
+    except Exception as error:
+        raise Exception(f"Error during tokenizing: {error}")
+    
+    logger.error(f"Error during tokenization {error}")
     logger.info("Tokenizing complete")
+    
+    
     training_args = TrainingArguments(
         output_dir="my_model", evaluation_strategy="epoch"
     )
+
     if not small_eval_dataset or small_train_dataset:
         raise ValueError("Datasets not loaded correctly!")
+    
     logger.info("Results will be saved to ./my_model")
     logger.info("Starting training run")
-    trainer = Trainer(
-        model=model,
-        args=training_args,
-        train_dataset=small_train_dataset,
-        eval_dataset=small_eval_dataset,
-        compute_metrics=compute_metrics,
-    )
+    
+    try:
+        trainer = Trainer(
+            model=model,
+            args=training_args,
+            train_dataset=small_train_dataset,
+            eval_dataset=small_eval_dataset,
+            compute_metrics=compute_metrics,
+        )
+    except Exception as error:
+        logger.error(f"Error during training{error}")
+        raise Exception(f"Error during training{error}")
+    
     logger.info("Starting training run")
     trainer.train()
     logger.info("Training run complete")
@@ -103,9 +127,11 @@ def print_in_color(text, color_code):
 
 
 def register_particle(addr):
-    logger.info("Registering particle")
     """This function inits the particle."""
-    url = f"{node_url}/register_particle"
+
+    logger.info("Registering particle")
+    url = f"{NODE_URL}/register_particle"
+    
     try:
         response = requests.post(url, timeout=10, json={"address": addr})
         if response.status_code == 200:
@@ -117,16 +143,19 @@ def register_particle(addr):
 
 
 def complete_task(wallet_address):
-    logger.info("Final step")
     """This function completes the task."""
+    logger.info("Final step")
 
-    url = f"{node_url}/complete_task"
+    url = f"{NODE_URL}/complete_task"
     json_data = json.dumps({"address": wallet_address})
     files = {
         "file1": open("my_model/config.json", "rb"),
         "file2": open("my_model/training_args.bin", "rb"),
         "r": (None, json_data, "application/json")
     }
+
+    logger.info("making request")
+    
     try:
         response = requests.post(url, files=files, timeout=60)
         if response.status_code == 200:
@@ -139,8 +168,10 @@ def complete_task(wallet_address):
 
 
 def perform():
-    logger.info("Perform Task")
+    logger.info("Performing Task")
+    
     addr = sys.argv[1] 
+
     if addr is not None:
         print_in_color(f"Address {addr} started to work.", "\033[33m")
         while True:
