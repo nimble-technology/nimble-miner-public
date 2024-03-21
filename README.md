@@ -85,6 +85,10 @@ git clone https://github.com/nimble-technology/nimble-miner-public.git
 cd nimble-miner-public
 make install
 ```
+Activate the nimenv_localminers virtual environment
+```
+source ./nimenv_localminers/bin/activate
+```
 
 ### Start Mining
 Replace the <wallet_address> by your Nimble wallet address on the command below.
