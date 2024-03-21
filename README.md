@@ -62,7 +62,7 @@ make install
 ### Generate a wallet
 ```
 # Go to the nimble-networkd's folder
-cd go/bin
+cd $HOME/go/bin
 
 # Generate a wallet (replace <wallet_name> by the wallet name you want)
 ./nimble-networkd keys add <wallet_name>
