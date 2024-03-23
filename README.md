@@ -6,7 +6,7 @@ Miners execute AI operations and provide computation power to the Network.
 Click on the following link for more information about Nimble and its technology > [https://www.nimble.technology/](https://www.nimble.technology/)
 
 ## System Specifications
-These are the system specifications to run the Nimble Miner
+These are the system specifications to run the Nimble Miner  
 Recommended:
 ```
 RTX 3080+ GPU
