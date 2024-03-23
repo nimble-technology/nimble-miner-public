@@ -96,8 +96,29 @@ Replace the <wallet_address> by your Nimble wallet address (“nimblexxx”) on 
 make run addr=<wallet_address>
 ```
 
-Congratulations ! You are now mining $NIM!
+**Congratulations ! You are now mining $NIM !**
 
 You can stop the miner by pressing CTRL+C
 To resume mining, re-run the command.
 
+## Bonus Tips
+
+### Run the Nimble Miner in background using Screen
+Screen is a powerful utility for creating and managing multiple virtual terminal sessions, enabling users to run processes in the background. 
+Utilize Screen to run the Nimble Miner while simultaneously maintaining access to your main session.
+Execute the following command to install Screen
+```
+# Install Screen
+sudo apt install screen
+```
+Create a new Screen session (you can replace “NimbleMinerSession“ with your desired session name)
+```
+screen -S NimbleMinerSession
+```
+Start mining on your Screen session
+```
+make run addr=<wallet_address>
+```
+**Congratulations ! The Nimble Miner is now running on your Screen Session.**
+Press CTRL + a + d to detach from your Screen session and return to your main session.
+Execute “screen -r“ from your main session if you want to return to your Nimble mining session.
