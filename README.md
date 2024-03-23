@@ -5,10 +5,8 @@ Nimble is building the first-ever decentralized AI framework.
 Miners execute AI operations and provide computation power to the Network.  
 Click on the following link for more information about Nimble and its technology > [https://www.nimble.technology/](https://www.nimble.technology/)
 
-## Installation
-This guide will helps you to install the Nimble Miner.
-
-### System Specs Requirements
+## System Specs Requirements
+These are the system specs requirements to run the Nimble Miner
 Recommended:
 ```
 RTX 3080+ GPU
@@ -23,6 +21,9 @@ Core i5 7400
 16GB RAM
 256 GB disk space
 ```
+
+## Installation
+This guide will helps you to install the Nimble Miner.
 
 ### Install Go
 Execute the following commands to install GO.  
