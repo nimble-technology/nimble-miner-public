@@ -9,15 +9,15 @@ install:
 
 run:
 ifndef addressList
-	$(error addressList (format : "nimble1xxxx nimble1yyyy" is not set.)
+	$(error address list (format : addressList="nimble1xxxx nimble1yyyy") is not set.)
 endif
 	@echo "----------------------------------"
-	@echo "Starting Process for Address List $(addressList)"
+	@echo "Starting Process for addresses $(addressList)"
 	
 	source ./nimenv_localminers/bin/activate && \
 	python execute.py $(addressList)
 	
-	@echo "Process Completed for Address List $(addressList)"
+	@echo "Process Completed for addresses $(addressList)"
 	@echo "----------------------------------"
 
 
