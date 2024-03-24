@@ -68,8 +68,14 @@ cd $HOME/go/bin
 # Generate a wallet (replace <wallet_name> by the wallet name you want)
 ./nimble-networkd keys add <wallet_name>
 ```
+This will ask you to create a passphrase (password) of your choosing.
 After you've entered your passphrase, your wallet shoud be successfully created and the “address: nimblexxxx” output can confirm that!  
 Copy the generated Nimble address and save your wallet information in a safe place.
+
+Note : to recover an existing wallet from its mnemonic, please run :
+```# Recover a wallet from its mnemonic
+./nimble-networkd keys add <wallet_name> --recover
+```
 
 ### Nimble Miner Setup
 Note: python3.9 (or above) and pip3 are required for the remaining steps.  
