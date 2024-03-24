@@ -60,6 +60,11 @@ cd wallet-public
 make install
 ```
 
+Note : if you get an error such as "make command not found" please run the following command : 
+```
+sudo apt-get install make
+```
+
 ### Generate a wallet
 ```
 # Go to the nimble-networkd's folder
