@@ -49,7 +49,7 @@ def execute(task_args):
         tokenized_datasets["test"].shuffle(seed=task_args["seed"]).select(range(task_args["num_rows"]))
     )
     training_args = TrainingArguments(
-        output_dir="my_model", evaluation_strategy="epoch"
+        output_dir="my_model", evaluation_strategy="epoch", fp16=True, torch_compile=True
     )
 
     trainer = Trainer(
@@ -61,7 +61,6 @@ def execute(task_args):
     )
     trainer.train()
     trainer.save_model("my_model")
-
 
 def print_in_color(text, color_code):
     """This function prints the text in the specified color."""

@@ -104,6 +104,22 @@ To resume mining, re-run the command.
 
 ## Bonus Tips
 
+### Optimizing your it/s
+Depending on your set-up, tweaking the training parameters could lead to better memory utilization and/or an increase of the training speed.
+To do so, you need to open the execute.py file and edit the following section : 
+```
+training_args = TrainingArguments(
+        output_dir="my_model", evaluation_strategy="epoch"
+    )
+```
+
+Parameters that were identified as potential additions and could result in increased training speed are : torch_compile and fp16/bf16 
+Please note, this may or may not apply to your particular set-up.
+
+A full description can be found here : https://huggingface.co/docs/transformers/en/perf_train_gpu_one
+
+
+
 ### Run the Nimble Miner in background using Screen
 Screen is a powerful utility for creating and managing multiple virtual terminal sessions, enabling users to run processes in the background.   
 Utilize Screen to run the Nimble Miner while simultaneously maintaining access to your main session.  
