@@ -96,19 +96,23 @@ def complete_task(wallet_address):
 
 
 def perform():
-    addr = sys.argv[1] 
+    addr = sys.argv[1]
     if addr is not None:
         print_in_color(f"Address {addr} started to work.", "\033[33m")
+        completed_jobs = 0
+        total_jobs = 0
         while True:
             try:
                 print_in_color(f"Preparing", "\033[33m")
                 time.sleep(10)
                 task_args = register_particle(addr)
+                total_jobs += 1
                 print_in_color(f"Address {addr} received the task.", "\033[33m")
                 execute(task_args)
                 print_in_color(f"Address {addr} executed the task.", "\033[32m")
                 complete_task(addr)
-                print_in_color(f"Address {addr} completed the task. ", "\033[32m")
+                completed_jobs += 1
+                print_in_color(f"Address {addr} completed {completed_jobs}/{total_jobs} jobs.", "\033[32m")
             except Exception as e:
                 print_in_color(f"Error: {e}", "\033[31m")
     else:
