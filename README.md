@@ -108,6 +108,11 @@ Replace the <wallet_addresses> by your Nimble wallet addresses (“nimble1xxx ni
 make run addressList=<wallet_addresses>
 ```
 
+Note : if you get an error such as "Failed to find C compiler." please run the following command : 
+```
+sudo apt-get install build-essential
+```
+
 **Congratulations ! You are now mining $NIM !**  
 
 You can stop the miner by pressing CTRL+C   
