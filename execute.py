@@ -46,7 +46,7 @@ def execute(task_args, gpu_index):
         tokenized_datasets["train"].shuffle(seed=task_args["seed"]).select(range(task_args["num_rows"]))
     )
     small_eval_dataset = (
-        tokenized_datasets["test"].shuffle(seed=task_args["seed"]).select(range(task_args["num_rows"]))
+        tokenized_datasets["train"].shuffle(seed=task_args["seed"]).select(range(task_args["num_rows"]))
     )
     training_args = TrainingArguments(
         output_dir="my_model", evaluation_strategy="epoch"
@@ -131,7 +131,7 @@ def perform():
     while True:
         try:
             print_in_color(f"Preparing", "\033[33m")
-            time.sleep(10)
+            time.sleep(60)
             task_args = register_particle(addr)
             print_in_color(f"Address {addr} received the task.", "\033[33m")
             execute(task_args, gpu_index)
