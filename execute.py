@@ -10,8 +10,8 @@ from datasets import load_dataset
 from transformers import (AutoModelForSequenceClassification, AutoTokenizer,
                           Trainer, TrainingArguments)
 
-node_url = "https://mainnet.nimble.technology:443"
 
+node_url = "https://mainnet.nimble.technology:443"
 
 def compute_metrics(eval_pred):
     """This function computes the accuracy of the model."""
@@ -32,7 +32,7 @@ def execute(task_args):
         return tokenizer(
             examples["text"], padding="max_length", truncation=True
         )
-
+  
     model = AutoModelForSequenceClassification.from_pretrained(
         task_args["model_name"], num_labels=task_args["num_labels"]
     )
@@ -49,7 +49,7 @@ def execute(task_args):
         tokenized_datasets["train"].shuffle(seed=task_args["seed"]).select(range(task_args["num_rows"]))
     )
     training_args = TrainingArguments(
-        output_dir="my_model", evaluation_strategy="epoch"
+        output_dir="my_model", evaluation_strategy="epoch", save_strategy='epoch',
     )
 
     trainer = Trainer(
@@ -73,6 +73,9 @@ def register_particle(addr):
     """This function inits the particle."""
     url = f"{node_url}/register_particle"
     response = requests.post(url, timeout=10, json={"address": addr})
+    print_in_color(response.status_code, response.json())
+    if response.status_code == 400:
+        raise Exception(f"Failed to init particle: {response.text}")
     if response.status_code != 200:
         raise Exception(f"Failed to init particle: Try later.")
     task = response.json()
@@ -102,13 +105,14 @@ def perform():
         while True:
             try:
                 print_in_color(f"Preparing", "\033[33m")
-                time.sleep(60)
+                time.sleep(5)
                 task_args = register_particle(addr)
                 print_in_color(f"Address {addr} received the task.", "\033[33m")
                 execute(task_args)
                 print_in_color(f"Address {addr} executed the task.", "\033[32m")
                 complete_task(addr)
-                print_in_color(f"Address {addr} completed the task. ", "\033[32m")
+                print_in_color(f"Address {addr} completed the task. Waiting for next", "\033[32m")
+                time.sleep(60)
             except Exception as e:
                 print_in_color(f"Error: {e}", "\033[31m")
     else:
