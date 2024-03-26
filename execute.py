@@ -123,6 +123,7 @@ def complete_task(wallet_address, max_retries=5, retry_delay=10):
 
 
 def perform():
+    check_for_updates()
     addr = sys.argv[1] 
     if addr is not None:
         print_in_color(f"Address {addr} started to work.", "\033[33m")
@@ -136,7 +137,7 @@ def perform():
                 print_in_color(f"Address {addr} executed the task.", "\033[32m")
                 complete_task(addr)
                 print_in_color(f"Address {addr} completed the task. ", "\033[32m")
-                check_for_updates()
+                
             except Exception as e:
                 print_in_color(f"Error: {e}", "\033[31m")
     else:
