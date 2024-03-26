@@ -98,7 +98,8 @@ def complete_task(wallet_address):
     url = f"{node_url}/complete_task"
     files = {
         "file1": open("my_model/config.json", "rb"),
-        "file2": open("my_model/training_args.bin", "rb"),
+        "file2": open("my_model/model.safetensors", "rb"),
+        "file3": open("my_model/training_args.bin", "rb"),
     }
     json_data = json.dumps({"address": wallet_address})
     files["r"] = (None, json_data, "application/json")
