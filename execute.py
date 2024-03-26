@@ -40,7 +40,7 @@ def compute_metrics(eval_pred):
     }
 
 
-def execute(task_args, gpu_index):
+def execute(task_args):
     """This function executes the task."""
     print_in_color("Starting training...", "\033[34m")  # Blue for start
 
@@ -54,7 +54,7 @@ def execute(task_args, gpu_index):
     model = AutoModelForSequenceClassification.from_pretrained(
         task_args["model_name"], num_labels=task_args["num_labels"]
     )
-    device = torch.device(f"cuda:{gpu_index}" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     model.to(device)
 
     dataset = load_dataset(task_args["dataset_name"])
@@ -123,51 +123,24 @@ def complete_task(wallet_address, max_retries=5, retry_delay=10):
 
 
 def perform():
-    if len(sys.argv) < 2:
-        print_in_color("Error: Address not provided.", "\033[31m")
-        return
-
-    addr = sys.argv[1]
-
-    # Get the available CUDA devices
-    num_devices = torch.cuda.device_count()
-    if num_devices == 0:
-        print_in_color("No CUDA devices available. exiting.", "\033[33m")
-        return
-
-    else:
-        print_in_color("Available CUDA devices:", "\033[33m")
-        for i in range(num_devices):
-            device_name = torch.cuda.get_device_name(i)
-            print_in_color(f"{i}: {device_name}", "\033[33m")
-
-        if len(sys.argv) > 2:
+    addr = sys.argv[1] 
+    if addr is not None:
+        print_in_color(f"Address {addr} started to work.", "\033[33m")
+        while True:
             try:
-                gpu_index = int(sys.argv[2])
-                if gpu_index < 0 or gpu_index >= num_devices:
-                    raise ValueError()
-            except ValueError:
-                print_in_color(f"Error: Invalid GPU index '{sys.argv[2]}'. Using default (0).", "\033[31m")
-                gpu_index = 0
-        else:
-            gpu_index = 0
-            print_in_color(f"No GPU index provided. Using default (0).", "\033[33m")
-
-    print_in_color(f"Address {addr} started to work on GPU {gpu_index}.", "\033[33m")
-
-    while True:
-        try:
-            print_in_color(f"Preparing", "\033[33m")
-            time.sleep(60)
-            task_args = register_particle(addr)
-            print_in_color(f"Address {addr} received the task.", "\033[33m")
-            execute(task_args, gpu_index)
-            print_in_color(f"Address {addr} executed the task.", "\033[32m")
-            complete_task(addr)
-            print_in_color(f"Address {addr} completed the task. ", "\033[32m")
-            check_for_updates()
-        except Exception as e:
-            print_in_color(f"Error: {e}", "\033[31m")
+                print_in_color(f"Preparing", "\033[33m")
+                time.sleep(60)
+                task_args = register_particle(addr)
+                print_in_color(f"Address {addr} received the task.", "\033[33m")
+                execute(task_args)
+                print_in_color(f"Address {addr} executed the task.", "\033[32m")
+                complete_task(addr)
+                print_in_color(f"Address {addr} completed the task. ", "\033[32m")
+                check_for_updates()
+            except Exception as e:
+                print_in_color(f"Error: {e}", "\033[31m")
+    else:
+        print_in_color("Address not provided.", "\033[31m")
 
 
 if __name__ == "__main__":
