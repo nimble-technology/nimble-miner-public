@@ -103,9 +103,9 @@ source ./nimenv_localminers/bin/activate
 ```
 
 ### Start Mining
-Replace the <wallet_addresses> by your Nimble wallet addresses (“nimble1xxx nimble1yyy nimble1zzz”) on the command below.
+Replace the <wallet_address> by your Nimble wallet addresses on the command below.
 ```
-make run addressList=<wallet_addresses>
+make run addr=<wallet_address>
 ```
 
 Note : if you get an error such as "Failed to find C compiler." please run the following command : 

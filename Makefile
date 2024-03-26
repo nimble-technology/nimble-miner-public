@@ -8,20 +8,14 @@ install:
 	pip3 install -r requirements.txt
 
 run:
-ifndef addressList
-	$(error address list (format : addressList="nimble1xxxx nimble1yyyy") is not set.)
+ifndef addr
+	$(error addr is not set.)
 endif
 	@echo "----------------------------------"
-	@echo "Starting Process for addresses $(addressList)"
+	@echo "Starting Process for Address $(addr)"
 	
 	source ./nimenv_localminers/bin/activate && \
-	python execute.py $(addressList)
+	python execute.py $(addr)
 	
-	@echo "Process Completed for addresses $(addressList)"
+	@echo "Process Completed for Address $(addr)"
 	@echo "----------------------------------"
-
-
-
-
-
-

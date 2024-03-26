@@ -104,25 +104,23 @@ def complete_task(wallet_address, max_retries=5, retry_delay=10):
 
 
 def perform():
-    addresslist = sys.argv[1:]
-    while True:
-        for addr in addresslist: 
-            if addr is not None:
-                print_in_color(f"Address {addr} started to work.", "\033[33m")
-                try:
-                    print_in_color(f"Preparing", "\033[33m")
-                    time.sleep(60)
-                    task_args = register_particle(addr)
-                    print_in_color(f"Address {addr} received the task.", "\033[33m")
-                    execute(task_args)
-                    print_in_color(f"Address {addr} executed the task.", "\033[32m")
-                    complete_task(addr)
-                    print_in_color(f"Address {addr} completed the task. ", "\033[32m")
-                except Exception as e:
-                    print_in_color(f"Error: {e}", "\033[31m")
-            else:
-                print_in_color("Address not provided.", "\033[31m")
-                break
+    addr = sys.argv[1] 
+    if addr is not None:
+        print_in_color(f"Address {addr} started to work.", "\033[33m")
+        while True:
+            try:
+                print_in_color(f"Preparing", "\033[33m")
+                time.sleep(60)
+                task_args = register_particle(addr)
+                print_in_color(f"Address {addr} received the task.", "\033[33m")
+                execute(task_args)
+                print_in_color(f"Address {addr} executed the task.", "\033[32m")
+                complete_task(addr)
+                print_in_color(f"Address {addr} completed the task. ", "\033[32m")
+            except Exception as e:
+                print_in_color(f"Error: {e}", "\033[31m")
+    else:
+        print_in_color("Address not provided.", "\033[31m")
     
 if __name__ == "__main__":
     perform()
