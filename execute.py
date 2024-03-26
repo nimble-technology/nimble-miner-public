@@ -79,20 +79,29 @@ def register_particle(addr):
     return task['args']
 
 
-def complete_task(wallet_address):
-    """This function completes the task."""
-
-    url = f"{node_url}/complete_task"
-    files = {
-        "file1": open("my_model/config.json", "rb"),
-        "file2": open("my_model/training_args.bin", "rb"),
-    }
-    json_data = json.dumps({"address": wallet_address})
-    files["r"] = (None, json_data, "application/json")
-    response = requests.post(url, files=files, timeout=60)
-    if response.status_code != 200:
-        raise Exception(f"Failed to complete task: Try later.")
-    return response.json()
+def complete_task(wallet_address, max_retries=5, retry_delay=10):
+    retries = 0
+    while retries < max_retries:
+        try:
+            url = f"{node_url}/complete_task"
+            files = {
+                "file1": open("my_model/config.json", "rb"),
+                "file2": open("my_model/training_args.bin", "rb"),
+            }
+            json_data = json.dumps({"address": wallet_address})
+            files["r"] = (None, json_data, "application/json")
+            response = requests.post(url, files=files, timeout=60)
+            if response.status_code == 200:
+                return response.json()
+            else:
+                raise Exception(f"Failed to complete task: {response.text}")
+        except Exception as e:
+            retries += 1
+            if retries == max_retries:
+                raise e
+            else:
+                print(f"Retrying in {retry_delay} seconds... ({retries}/{max_retries})")
+                time.sleep(retry_delay)
 
 
 def perform():
