@@ -49,7 +49,7 @@ def execute(task_args):
         tokenized_datasets["train"].shuffle(seed=task_args["seed"]).select(range(task_args["num_rows"]))
     )
     training_args = TrainingArguments(
-        output_dir="my_model", evaluation_strategy="epoch", fp16=True, torch_compile=True
+        output_dir="my_model", evaluation_strategy="epoch", fp16=True, torch_compile=True, dataloader_num_workers=4
     )
 
     trainer = Trainer(
