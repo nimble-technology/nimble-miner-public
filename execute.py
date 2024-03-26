@@ -62,6 +62,7 @@ def execute(task_args):
     trainer.train()
     trainer.save_model("my_model")
 
+
 def print_in_color(text, color_code):
     """This function prints the text in the specified color."""
     END_COLOR = "\033[0m"
