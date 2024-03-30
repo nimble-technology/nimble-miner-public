@@ -105,6 +105,11 @@ def complete_task(wallet_address, max_retries=5, retry_delay=10):
             else:
                 print(f"Retrying in {retry_delay} seconds... ({retries}/{max_retries})")
                 time.sleep(retry_delay)
+              
+def cleardir():
+        command = 'rm -r ./my_model/checkpoint-*'
+        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        print("Clearing working dir ")
 
 
 def perform():
@@ -115,6 +120,7 @@ def perform():
             try:
                 print_in_color(f"Preparing", "\033[33m")
                 time.sleep(5)
+                cleardir()
                 task_args = register_particle(addr)
                 print_in_color(f"Address {addr} received the task.", "\033[33m")
                 execute(task_args)
