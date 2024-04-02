@@ -5,12 +5,14 @@ import sys
 import git
 import os
 import time
+import shutil
 import numpy as np
 import requests
 import torch
 from datasets import load_dataset
 from transformers import (AutoModelForSequenceClassification, AutoTokenizer,
                           Trainer, TrainingArguments)
+
 
 node_url = "https://mainnet.nimble.technology:443"
 git_repo_url = "https://github.com/nimble-technology/nimble-miner-public.git"
@@ -30,6 +32,7 @@ def check_for_updates():
     else:
         print_in_color("No updates found. Running latest miner", "\033[33m")
 
+
 def compute_metrics(eval_pred):
     """This function computes the accuracy of the model."""
     logits, labels = eval_pred
@@ -38,6 +41,14 @@ def compute_metrics(eval_pred):
         "accuracy": (predictions == labels).astype(np.float32).mean().item()
     }
 
+# check current disk space
+def check_disk_space():
+    """This function checks the disk space."""
+    total, used, free = shutil.disk_usage("/")
+    print_in_color(f"Total: {total / (2**30):.2f} GB", "\033[31m")
+    print_in_color(f"Used: {used / (2**30):.2f} GB", "\033[31m")
+    print_in_color(f"Free: {free / (2**30):.2f} GB", "\033[31m")
+  
 
 def execute(task_args):
     """This function executes the task."""
@@ -49,7 +60,7 @@ def execute(task_args):
         return tokenizer(
             examples["text"], padding="max_length", truncation=True
         )
-
+  
     model = AutoModelForSequenceClassification.from_pretrained(
         task_args["model_name"], num_labels=task_args["num_labels"]
     )
@@ -66,7 +77,7 @@ def execute(task_args):
         tokenized_datasets["train"].shuffle(seed=task_args["seed"]).select(range(task_args["num_rows"]))
     )
     training_args = TrainingArguments(
-        output_dir="my_model", evaluation_strategy="epoch"
+        output_dir="my_model", evaluation_strategy="epoch", save_strategy='epoch',
     )
 
     trainer = Trainer(
@@ -90,6 +101,9 @@ def register_particle(addr):
     """This function inits the particle."""
     url = f"{node_url}/register_particle"
     response = requests.post(url, timeout=10, json={"address": addr})
+    print_in_color(response.status_code, response.json())
+    if response.status_code == 400:
+        raise Exception(f"Failed to init particle: {response.text}")
     if response.status_code != 200:
         raise Exception(f"Failed to init particle: Try later.")
     task = response.json()
@@ -128,14 +142,20 @@ def perform():
         while True:
             try:
                 print_in_color(f"Preparing", "\033[33m")
-                time.sleep(60)
+                time.sleep(5)
                 task_args = register_particle(addr)
                 print_in_color(f"Address {addr} received the task.", "\033[33m")
                 execute(task_args)
                 print_in_color(f"Address {addr} executed the task.", "\033[32m")
                 complete_task(addr)
-                print_in_color(f"Address {addr} completed the task. ", "\033[32m")
+                print_in_color(f"Address {addr} completed the task. Waiting for next", "\033[32m")
+                shutil.rmtree("my_model")
+                print_in_color("### Deleted the model.", "\033[31m")
+                print_in_color("### Disk space:", "\033[31m")
+                check_disk_space()
+                print_in_color("### Checking for updated miner:", "\033[31m")
                 check_for_updates()
+                time.sleep(60)
             except Exception as e:
                 print_in_color(f"Error: {e}", "\033[31m")
     else:
