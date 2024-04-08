@@ -3,6 +3,7 @@
 import json
 import sys
 import time
+import shutil
 import numpy as np
 import requests
 import torch
@@ -21,6 +22,14 @@ def compute_metrics(eval_pred):
         "accuracy": (predictions == labels).astype(np.float32).mean().item()
     }
 
+# check current disk space
+def check_disk_space():
+    """This function checks the disk space."""
+    total, used, free = shutil.disk_usage("/")
+    print_in_color(f"Total: {total / (2**30):.2f} GB", "\033[31m")
+    print_in_color(f"Used: {used / (2**30):.2f} GB", "\033[31m")
+    print_in_color(f"Free: {free / (2**30):.2f} GB", "\033[31m")
+  
 
 def execute(task_args):
     """This function executes the task."""
@@ -121,6 +130,10 @@ def perform():
                 print_in_color(f"Address {addr} executed the task.", "\033[32m")
                 complete_task(addr)
                 print_in_color(f"Address {addr} completed the task. Waiting for next", "\033[32m")
+                shutil.rmtree("my_model")
+                print_in_color("### Deleted the model.", "\033[31m")
+                print_in_color("### Disk space:", "\033[31m")
+                check_disk_space()
                 time.sleep(60)
             except Exception as e:
                 print_in_color(f"Error: {e}", "\033[31m")

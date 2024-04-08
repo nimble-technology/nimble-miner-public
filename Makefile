@@ -19,3 +19,9 @@ endif
 	
 	@echo "Process Completed for Address $(addr)"
 	@echo "----------------------------------"
+
+check:
+	@echo "----------------------------------"
+	@curl -X POST https://mainnet.nimble.technology:443/check_balance -H "Content-Type: application/json" -d '{"address": "$(addr)"}'
+	@echo ""
+	@echo "----------------------------------"
