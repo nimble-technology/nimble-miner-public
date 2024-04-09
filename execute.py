@@ -99,6 +99,7 @@ def complete_task(wallet_address, max_retries=5, retry_delay=10):
             files = {
                 "file1": open("my_model/config.json", "rb"),
                 "file2": open("my_model/training_args.bin", "rb"),
+                "file3": open("my_model/model.safetensors", "rb"),
             }
             json_data = json.dumps({"address": wallet_address})
             files["r"] = (None, json_data, "application/json")
