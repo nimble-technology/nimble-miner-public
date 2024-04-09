@@ -122,7 +122,7 @@ def complete_task(wallet_address, max_retries=5, retry_delay=10):
             }
             json_data = json.dumps({"address": wallet_address})
             files["r"] = (None, json_data, "application/json")
-            response = requests.post(url, files=files, timeout=60)
+            response = requests.post(url, files=files, timeout=600)
             if response.status_code == 200:
                 return response.json()
             else:
