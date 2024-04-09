@@ -2,6 +2,8 @@
 
 import json
 import sys
+import git
+import os
 import time
 import shutil
 import numpy as np
@@ -13,6 +15,23 @@ from transformers import (AutoModelForSequenceClassification, AutoTokenizer,
 
 
 node_url = "https://mainnet.nimble.technology:443"
+git_repo_url = "https://github.com/nimble-technology/nimble-miner-public.git"
+
+
+def check_for_updates():
+    """Check for updates in the Git repository."""
+    repo = git.Repo(search_parent_directories=True)
+    repo.remotes.origin.fetch()
+    current_commit = repo.head.commit
+    repo.remotes.origin.pull()
+    new_commit = repo.head.commit
+    if current_commit != new_commit:
+        print_in_color("Updated the code. Restarting...", "\033[33m")
+        python = sys.executable
+        os.execl(python, python, *sys.argv)
+    else:
+        print_in_color("No updates found. Running latest miner", "\033[33m")
+
 
 def compute_metrics(eval_pred):
     """This function computes the accuracy of the model."""
@@ -135,6 +154,8 @@ def perform():
                 print_in_color("### Deleted the model.", "\033[31m")
                 print_in_color("### Disk space:", "\033[31m")
                 check_disk_space()
+                print_in_color("### Checking for updated miner:", "\033[31m")
+                check_for_updates()
                 time.sleep(60)
             except Exception as e:
                 print_in_color(f"Error: {e}", "\033[31m")
