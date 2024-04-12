@@ -61,6 +61,9 @@ def execute(task_args):
             examples["text"], padding="max_length", truncation=True
         )
   
+    def model_init():
+        return AutoModelForSequenceClassification.from_pretrained(task_args["model_name"], num_labels=task_args["num_labels"])
+    
     model = AutoModelForSequenceClassification.from_pretrained(
         task_args["model_name"], num_labels=task_args["num_labels"]
     )
@@ -76,12 +79,13 @@ def execute(task_args):
     small_eval_dataset = (
         tokenized_datasets["train"].shuffle(seed=task_args["seed"]).select(range(task_args["num_rows"]))
     )
+
     training_args = TrainingArguments(
-        output_dir="my_model", evaluation_strategy="epoch", save_strategy='epoch', fp16=True, torch_compile=True, dataloader_num_workers=4
+        output_dir="my_model", evaluation_strategy="epoch", save_strategy='epoch', seed=task_args['seed'], torch_compile=True, dataloader_num_workers=4
     )
 
     trainer = Trainer(
-        model=model,
+        model_init=model_init,
         args=training_args,
         train_dataset=small_train_dataset,
         eval_dataset=small_eval_dataset,
