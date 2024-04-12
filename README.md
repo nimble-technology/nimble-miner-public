@@ -129,8 +129,8 @@ training_args = TrainingArguments(
     )
 ```
 
-Parameters that were identified as potential additions and could result in increased training speed are : torch_compile and fp16/bf16 
-Please note, this may or may not apply to your particular set-up.
+
+Please note, some parameters such as fp16 or bf16 may lead to a loss of precision and lower rewards/bad reputation.
 
 A full description can be found here : https://huggingface.co/docs/transformers/en/perf_train_gpu_one
 
