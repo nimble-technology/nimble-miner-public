@@ -7,11 +7,11 @@ import os
 import time
 import shutil
 import numpy as np
-import requests
 import torch
 from datasets import load_dataset
 from transformers import (AutoModelForSequenceClassification, AutoTokenizer,
                           Trainer, TrainingArguments)
+import httpx
 
 
 node_url = "https://mainnet.nimble.technology:443"
@@ -104,40 +104,55 @@ def print_in_color(text, color_code):
 def register_particle(addr):
     """This function inits the particle."""
     url = f"{node_url}/register_particle"
-    response = requests.post(url, timeout=10, json={"address": addr})
-    print_in_color(response.status_code, response.json())
-    if response.status_code == 400:
-        raise Exception(f"Failed to init particle: {response.text}")
-    if response.status_code != 200:
-        raise Exception(f"Failed to init particle: Try later.")
-    task = response.json()
-    return task['args']
+    data = {"address": addr}
+
+    try:
+        # Create an HTTP/2 client instance
+        with httpx.Client(http2=True) as client:
+
+            # Make the POST request
+            response = client.post(url, json=data, timeout=10)
+
+            # Ensure it's successful
+            response.raise_for_status()
+
+            # Return the response JSON
+            task = response.json()
+            return task['args']
+
+    except httpx.HTTPStatusError as exc:
+        raise Exception(f"Failed to init particle: Try later.") from exc
 
 
-def complete_task(wallet_address, max_retries=5, retry_delay=10):
-    retries = 0
-    while retries < max_retries:
-        try:
-            url = f"{node_url}/complete_task"
-            files = {
-                "file1": open("my_model/config.json", "rb"),
-                "file2": open("my_model/training_args.bin", "rb"),
-                "file3": open("my_model/model.safetensors", "rb"),
-            }
-            json_data = json.dumps({"address": wallet_address})
-            files["r"] = (None, json_data, "application/json")
-            response = requests.post(url, files=files, timeout=600)
-            if response.status_code == 200:
-                return response.json()
-            else:
-                raise Exception(f"Failed to complete task: {response.text}")
-        except Exception as e:
-            retries += 1
-            if retries == max_retries:
-                raise e
-            else:
-                print(f"Retrying in {retry_delay} seconds... ({retries}/{max_retries})")
-                time.sleep(retry_delay)
+def complete_task(wallet_address):
+    """This function completes the task."""
+
+    url = f"{node_url}/complete_task"
+    files = {
+        "file1": open("my_model/config.json", "rb"),
+        "file2": open("my_model/training_args.bin", "rb"),
+        "file3": open("my_model/model.safetensors", "rb"),
+    }
+    json_data = json.dumps({"address": wallet_address})
+    files["r"] = (None, json_data, "application/json")
+
+    try:
+        # Create an HTTP/2 client instance
+        with httpx.Client(http2=True) as client:
+
+            # Make the POST request
+            response = client.post(url, files=files, timeout=60)
+
+            # Ensure it's successful
+            response.raise_for_status()
+
+            # Convert the response content to JSON
+            result = response.json()
+
+    except httpx.HTTPStatusError as exc:
+        raise Exception(f"Failed to complete task: Try later.") from exc
+
+    return result
 
 
 def perform():
@@ -165,6 +180,7 @@ def perform():
                 print_in_color(f"Error: {e}", "\033[31m")
     else:
         print_in_color("Address not provided.", "\033[31m")
-    
+
+
 if __name__ == "__main__":
     perform()
