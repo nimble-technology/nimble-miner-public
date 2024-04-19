@@ -105,7 +105,7 @@ def register_particle(addr):
     """This function inits the particle."""
     url = f"{node_url}/register_particle"
     response = requests.post(url, timeout=10, json={"address": addr})
-    print_in_color(response.status_code, response.json())
+    print_in_color(response.status_code, "\033[32m")
     if response.status_code == 400:
         raise Exception(f"Failed to init particle: {response.text}")
     if response.status_code != 200:
