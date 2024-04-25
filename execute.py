@@ -9,6 +9,8 @@ import shutil
 import numpy as np
 import requests
 import torch
+from datetime import datetime
+now = datetime.now()
 from datasets import load_dataset
 from transformers import (AutoModelForSequenceClassification, AutoTokenizer,
                           Trainer, TrainingArguments)
@@ -98,7 +100,9 @@ def execute(task_args):
 def print_in_color(text, color_code):
     """This function prints the text in the specified color."""
     END_COLOR = "\033[0m"
-    print(f"{color_code}{text}{END_COLOR}")
+    now = datetime.now()
+    formatted_now = now.strftime("%Y-%m-%d %H:%M:%S")
+    print(f"{color_code}{formatted_now} {text}{END_COLOR}")
 
 
 def register_particle(addr):
@@ -146,8 +150,10 @@ def perform():
         print_in_color(f"Address {addr} started to work.", "\033[33m")
         while True:
             try:
+                print_in_color("### Checking for updated miner:", "\033[31m")
+                check_for_updates()
                 print_in_color(f"Preparing", "\033[33m")
-                time.sleep(5)
+                time.sleep(30)
                 task_args = register_particle(addr)
                 print_in_color(f"Address {addr} received the task.", "\033[33m")
                 execute(task_args)
@@ -158,9 +164,7 @@ def perform():
                 print_in_color("### Deleted the model.", "\033[31m")
                 print_in_color("### Disk space:", "\033[31m")
                 check_disk_space()
-                print_in_color("### Checking for updated miner:", "\033[31m")
-                check_for_updates()
-                time.sleep(60)
+                time.sleep(30)
             except Exception as e:
                 print_in_color(f"Error: {e}", "\033[31m")
     else:
