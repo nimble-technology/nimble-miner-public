@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  miner:
+    build: .
+    volumes:
+      - ./my_module:/app/my_module
+      - ./nimenv_localminers:/app/nimenv_localminers
+    command: "python3 -u /app/execute.py ${ADDR}"
+    env_file:
+      - .env
+    ulimits:
+      memlock: -1
+      stack: 67108864
+    # https://docs.docker.com/compose/gpu-support/
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1 # number of GPUs
+              capabilities: [gpu]
