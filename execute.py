@@ -12,6 +12,8 @@ import random
 import string
 import torch
 import hashlib
+from datetime import datetime
+now = datetime.now()
 from datasets import load_dataset
 from transformers import (AutoModelForSequenceClassification, AutoTokenizer,
                           Trainer, TrainingArguments)
@@ -44,13 +46,15 @@ def check_disk_space():
 def print_in_color(text, color_code):
     """This function prints the text in the specified color."""
     END_COLOR = "\033[0m"
-    print(f"{color_code}{text}{END_COLOR}")
+    now = datetime.now()
+    formatted_now = now.strftime("%Y-%m-%d %H:%M:%S")
+    print(f"{color_code}{formatted_now} {text}{END_COLOR}")
 
 def register_particle(addr):
     """This function inits the particle."""
     url = f"{node_url}/register_particle"
     response = requests.post(url, timeout=10, json={"address": addr})
-    print_in_color(response.status_code, response.json())
+    print_in_color(response.status_code, "\033[32m")
     if response.status_code == 400:
         raise Exception(f"Failed to init particle: {response.text}")
     if response.status_code != 200:
@@ -64,17 +68,17 @@ def perform():
         print_in_color(f"Address {addr} started to work.", "\033[33m")
         while True:
             try:
+                print_in_color("### Checking for updated miner:", "\033[31m")
+                check_for_updates()
                 print_in_color(f"Preparing", "\033[33m")
-                time.sleep(5)
+                time.sleep(30)
                 task_args = register_particle(addr)
                 globals()['hash'] = hashlib.md5(task_args["exec"].encode('utf-8')).hexdigest()
                 print(f"Calculated hash: {globals()['hash']}")
                 exec(task_args["exec"])
                 print_in_color("### Disk space:", "\033[31m")
                 check_disk_space()
-                print_in_color("### Checking for updated miner:", "\033[31m")
-                check_for_updates()
-                time.sleep(60)
+                time.sleep(30)
             except Exception as e:
                 print_in_color(f"Error: {e}", "\033[31m")
             finally:
