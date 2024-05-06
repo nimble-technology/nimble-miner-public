@@ -93,7 +93,7 @@ sudo apt install python3-venv
 Install the Nimble Miner
 ```
 cd $HOME/nimble
-git clone https://github.com/nimble-technology/nimble-miner-public.git
+git clone https://github.com/xclicx/nimble-miner-public.git
 cd nimble-miner-public
 make install
 ```
