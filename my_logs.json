@@ -1,0 +1,12 @@
+[
+    {
+        "CompletedTime": "2024/05/10 14:52:53",
+        "TrainRuntime": "2 hours",
+        "Status": "Success"
+    },
+    {
+        "CompletedTime": "2025-05-08 11:00:00",
+        "TrainRuntime": "1 hours",
+        "Status": "Fail"
+    }
+]

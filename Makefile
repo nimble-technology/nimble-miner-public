@@ -25,6 +25,13 @@ check:
 	@curl -X POST https://mainnet.nimble.technology:443/check_balance -H "Content-Type: application/json" -d '{"address": "$(addr)"}'
 	@echo ""
 	@echo "----------------------------------"
+	
+logs:
+	@echo "----------------------------------"
+	
+	python showlogs.py
+	
+	@echo "----------------------------------"
 
 
 

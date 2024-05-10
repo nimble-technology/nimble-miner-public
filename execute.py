@@ -132,12 +132,15 @@ def complete_task(wallet_address, max_retries=5, retry_delay=10):
             files["r"] = (None, json_data, "application/json")
             response = requests.post(url, files=files, timeout=600)
             if response.status_code == 200:
+                log_task(wallet_address,"2 hours","Success", 0)
                 return response.json()
             else:
+                log_task(wallet_address,"","Failed", 0)
                 raise Exception(f"Failed to complete task: {response.text}")
         except Exception as e:
             retries += 1
             if retries == max_retries:
+                log_task(wallet_address,"","Failed", 0)
                 raise e
             else:
                 print(f"Retrying in {retry_delay} seconds... ({retries}/{max_retries})")
@@ -169,6 +172,38 @@ def perform():
                 print_in_color(f"Error: {e}", "\033[31m")
     else:
         print_in_color("Address not provided.", "\033[31m")
+
+def log_task(wallet_address, train_runtime, status, file_path='my_logs.json'):
+    """
+    Logs data to a JSON file, appending a new JSON object for each set of data provided.
     
+    :param completed_time: The completion time of an task.
+    :param train_runtime: The runtime duration of a training.
+    :param file_path: Path to the JSON log file.
+    """
+    # Create a dictionary to store the data along with a timestamp
+    data = {
+        "WalletAddr": wallet_address,
+        "CompletedTime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "TrainRuntime": train_runtime,
+        "Status": status
+    }
+    
+    # Try to read the existing data from the file
+    try:
+        with open(file_path, 'r') as file:
+            # Load existing data into a list
+            logs = json.load(file)
+    except FileNotFoundError:
+        # If the file does not exist, start a new list
+        logs = []
+    
+    # Append new data to the list of logs
+    logs.append(data)
+    
+    # Write the updated list back to the file
+    with open(file_path, 'w') as file:
+        json.dump(logs, file, indent=4)
+        
 if __name__ == "__main__":
     perform()
