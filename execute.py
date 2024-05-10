@@ -93,9 +93,15 @@ def execute(task_args):
         eval_dataset=small_eval_dataset,
         compute_metrics=compute_metrics,
     )
+    # Start the timer
+    start_time = time.time()
     trainer.train()
     trainer.save_model("my_model")
-
+    # End timer
+    end_time = time.time()
+    # Calculate total training time
+    total_train_time = end_time - start_time
+    return total_train_time
 
 def print_in_color(text, color_code):
     """This function prints the text in the specified color."""
@@ -118,7 +124,7 @@ def register_particle(addr):
     return task['args']
 
 
-def complete_task(wallet_address, max_retries=5, retry_delay=10):
+def complete_task(wallet_address,train_run_time=0, max_retries=5, retry_delay=10):
     retries = 0
     while retries < max_retries:
         try:
@@ -132,15 +138,15 @@ def complete_task(wallet_address, max_retries=5, retry_delay=10):
             files["r"] = (None, json_data, "application/json")
             response = requests.post(url, files=files, timeout=600)
             if response.status_code == 200:
-                log_task(wallet_address,"2 hours","Success", 0)
+                log_task(wallet_address,train_run_time,"Success")
                 return response.json()
             else:
-                log_task(wallet_address,"","Failed", 0)
+                log_task(wallet_address,train_run_time,"Failed")
                 raise Exception(f"Failed to complete task: {response.text}")
         except Exception as e:
             retries += 1
             if retries == max_retries:
-                log_task(wallet_address,"","Failed", 0)
+                log_task(wallet_address,"","Failed")
                 raise e
             else:
                 print(f"Retrying in {retry_delay} seconds... ({retries}/{max_retries})")
@@ -159,9 +165,9 @@ def perform():
                 time.sleep(30)
                 task_args = register_particle(addr)
                 print_in_color(f"Address {addr} received the task.", "\033[33m")
-                execute(task_args)
+                total_train_time = execute(task_args)
                 print_in_color(f"Address {addr} executed the task.", "\033[32m")
-                complete_task(addr)
+                complete_task(addr, total_train_time)
                 print_in_color(f"Address {addr} completed the task. Waiting for next", "\033[32m")
                 shutil.rmtree("my_model")
                 print_in_color("### Deleted the model.", "\033[31m")

@@ -37,7 +37,7 @@ def display_log_data(file_path='my_logs.json'):
     nim_expected = success_count * 3
     # Print the table
     print(table)
-    print(f"Total tasks: {total_tasks}, Tasks successful: {success_count}, Tasks failed: {fail_count}, NIM Expected: {nim_expected} $NIM")
+    print(f"Total tasks: {total_tasks}, Tasks successful: {success_count}, Tasks failed: {fail_count}, Rewards Expected: {nim_expected} $NIM")
 
 # Example usage:
 display_log_data()
