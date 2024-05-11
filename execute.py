@@ -140,7 +140,7 @@ def complete_task(wallet_address, max_retries=5, retry_delay=10):
             if retries == max_retries:
                 raise e
             else:
-                print(f"Retrying in {retry_delay} seconds... ({retries}/{max_retries})")
+                print(f"Retrying for up to 10 minutes... ({retries} of {max_retries}) - task submission upload requires outward public network connection")
                 time.sleep(retry_delay)
 
 
