@@ -32,7 +32,7 @@ def display_log_data(file_path='my_logs.json'):
         table.add_row([entry['WalletAddr'],entry['CompletedTime'], entry['TrainRuntime'], entry['Status']])
         if entry['Status'].lower() == "success":
             success_count += 1
-        elif entry['Status'].lower() == "fail":
+        elif entry['Status'].lower() == "failed":
             fail_count += 1
     nim_expected = success_count * 3
     # Print the table
