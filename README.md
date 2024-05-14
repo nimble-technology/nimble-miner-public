@@ -26,6 +26,8 @@ If this is first time you use vast and dont know how to connect, please see it f
 Just coppy all these command and past to your terminal. Make sure u select correct template **Cuda:12.0.1-Devel-Ubuntu22.04**. If not, should copy line by line
 
 ```
+apt-get update -y && apt-get upgrade -y
+
 curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash - && sudo apt-get install -y nodejs && sudo npm install pm2 -g 
 
 cd
