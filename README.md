@@ -107,4 +107,7 @@ using CTRL + C to close logs session to continue using your terminal
 ``` pm2 list ```
 
 # Contact
-you can contact me if have any 
+you can contact me if have any issue related this guideline
+Discord: mytt0918
+[Telegram](https://t.me/OxCaos)
+[Twitter](https://twitter.com/kiwigamefi)
