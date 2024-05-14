@@ -100,8 +100,8 @@ def execute(task_args):
     # End timer
     end_time = time.time()
     # Calculate total training time
-    total_train_time = end_time - start_time
-    return total_train_time
+    training_duration = end_time - start_time
+    return training_duration
 
 def print_in_color(text, color_code):
     """This function prints the text in the specified color."""
