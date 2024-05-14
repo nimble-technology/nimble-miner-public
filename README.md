@@ -20,7 +20,7 @@ This guideline will use pm2 to handle session to run with multiple GPUs like 2x4
 This guidline working good with **Cuda:12.0.1-Devel-Ubuntu22.04** template for only one times to copy and paste
 ![image](https://github.com/b5prolh/nimble-miner-public/assets/18376326/b1e13f1b-3c6d-46f8-8862-95676717841a)
 
-If this is first time you use vast and dont know how to connect, please set it first: https://www.youtube.com/watch?v=KraLVgFS4vU
+If this is first time you use vast and dont know how to connect, please see it first: https://www.youtube.com/watch?v=KraLVgFS4vU
 
 # Install
 Just coppy all these command and past to your terminal. Make sure u select correct template **Cuda:12.0.1-Devel-Ubuntu22.04**. If not, should copy line by line
