@@ -126,3 +126,13 @@ you can contact me if have any issue related this guideline
 Discord: mytt0918
 [Telegram](https://t.me/OxCaos)
 [Twitter](https://twitter.com/kiwigamefi)
+
+
+# Donate
+If u want invite me a starbuck, give it to: 
+
+TRC20 ``` TQe1d7nZq3E3T3b6FsU5E5VeapNGVBeB18 ```
+BEP20 ``` 0xf96bbf1532287fb309409dbc4e6491eae46c030a ```
+Sol ``` 7ixWCfwk3xVoYkr2utfCkdqG3cVcUTJQ8cZJmpioGH5g ```
+
+Many thanks and hope we will become richer by mine NIM
