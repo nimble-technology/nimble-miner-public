@@ -26,17 +26,9 @@ If this is first time you use vast and dont know how to connect, please see it f
 Just coppy all these command and past to your terminal. Make sure u select correct template **Cuda:12.0.1-Devel-Ubuntu22.04**. If not, should copy line by line
 
 ```
-apt-get update -y && apt-get upgrade -y
+apt-get update -y && apt-get upgrade -y && apt install build-essential
 
 curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash - && sudo apt-get install -y nodejs && sudo npm install pm2 -g 
-
-cd
-mkdir -p ~/miniconda3
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
-bash /miniconda3/miniconda.sh -b -u -p /miniconda3
-rm -rf ~/miniconda3/miniconda.sh
-~/miniconda3/bin/conda init bash
-source $HOME/.bashrc
 
 sudo rm -rf /usr/local/go
 curl https://dl.google.com/go/go1.22.1.linux-amd64.tar.gz | sudo tar -C/usr/local -zxvf - ;
@@ -48,9 +40,14 @@ export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 EOF
 source $HOME/.bashrc
 
-sudo apt update -y && sudo apt install build-essential
-
+cd
+mkdir -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+bash /miniconda3/miniconda.sh -b -u -p /miniconda3
+rm -rf ~/miniconda3/miniconda.sh
+~/miniconda3/bin/conda init bash
 source $HOME/.bashrc
+
 conda create -n nimble python=3.11 -y
 conda activate nimble
 
