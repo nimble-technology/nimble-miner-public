@@ -77,6 +77,15 @@ cd && cd $HOME/nimble && cd wallet-public
 After you've entered your passphrase, your wallet shoud be successfully created and the “address: nimblexxxx” output can confirm that!
 Copy the generated Nimble address and save your wallet information in a safe place.
 
+# Recover a wallet
+If you already have seed pharse of wallet, u can recover it by command
+```
+cd && cd $HOME/nimble && cd wallet-public
+./nimble-networkd keys add YOUR_WALLET_NAME --recover
+```
+
+After you've entered your seed pharse and pass pharse, you wallet should be successfully create and the “address: nimblexxxx” output can confirm that!
+
 # Run miner
 ## 1xGPUs
 Run miner: ```pm2 start "CUDA_VISIBLE_DEVICES=0 make run addr=YOUR_SUBWALLET_1" --name nimble ```
