@@ -93,7 +93,9 @@ If u want see logs of all session, use
 Run Same for 4xGPus, 8xGPUs, just remember change **CUDA_VISIBLE_DEVICES** number
 
 # Show logs
+Run the command below to show task that complete or fail. This logs save to **my_logs.json** from your local storage. So u should backup it when u destroy your gpu, if not it will be lost.
 ``` make logs ```
+
 ![image](https://github.com/b5prolh/nimble-miner-public/assets/18376326/f93ff3b5-f69e-45cd-8553-404519e70f74)
 
 
