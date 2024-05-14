@@ -1,5 +1,6 @@
 import json
 from prettytable import PrettyTable
+from execute import print_in_color
 
 def display_log_data(file_path='my_logs.json'):
     """
@@ -13,10 +14,10 @@ def display_log_data(file_path='my_logs.json'):
         with open(file_path, 'r') as file:
             logs = json.load(file)
     except FileNotFoundError:
-        print("No log file found. Please make sure the log data has been created.")
+        print_in_color("No log file found. Please make sure the log data has been created.")
         return
     except json.JSONDecodeError:
-        print("Error reading the log file. Please check the file format.")
+        print_in_color("Error reading the log file. Please check the file format.")
         return
     
     # Create a PrettyTable object with headers
@@ -36,8 +37,8 @@ def display_log_data(file_path='my_logs.json'):
             fail_count += 1
     nim_expected = success_count * 3
     # Print the table
-    print(table)
-    print(f"Total tasks: {total_tasks}, Tasks successful: {success_count}, Tasks failed: {fail_count}, Rewards Expected: {nim_expected} $NIM")
+    print_in_color(table)
+    print_in_color(f"Total tasks: {total_tasks}, Tasks successful: {success_count}, Tasks failed: {fail_count}, Rewards Expected: {nim_expected} $NIM")
 
 # Example usage:
 display_log_data()

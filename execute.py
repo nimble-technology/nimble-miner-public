@@ -124,7 +124,7 @@ def register_particle(addr):
     return task['args']
 
 
-def complete_task(wallet_address,train_run_time=0, max_retries=5, retry_delay=10):
+def complete_task(wallet_address,training_duration=0, max_retries=5, retry_delay=10):
     retries = 0
     while retries < max_retries:
         try:
@@ -138,10 +138,10 @@ def complete_task(wallet_address,train_run_time=0, max_retries=5, retry_delay=10
             files["r"] = (None, json_data, "application/json")
             response = requests.post(url, files=files, timeout=600)
             if response.status_code == 200:
-                log_task(wallet_address,train_run_time,"Success")
+                log_task(wallet_address,training_duration,"Success")
                 return response.json()
             else:
-                log_task(wallet_address,train_run_time,"Failed")
+                log_task(wallet_address,training_duration,"Failed")
                 raise Exception(f"Failed to complete task: {response.text}")
         except Exception as e:
             retries += 1
@@ -165,9 +165,9 @@ def perform():
                 time.sleep(30)
                 task_args = register_particle(addr)
                 print_in_color(f"Address {addr} received the task.", "\033[33m")
-                total_train_time = execute(task_args)
+                training_duration = execute(task_args)
                 print_in_color(f"Address {addr} executed the task.", "\033[32m")
-                complete_task(addr, total_train_time)
+                complete_task(addr, training_duration)
                 print_in_color(f"Address {addr} completed the task. Waiting for next", "\033[32m")
                 shutil.rmtree("my_model")
                 print_in_color("### Deleted the model.", "\033[31m")
