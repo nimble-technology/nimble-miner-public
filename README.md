@@ -89,6 +89,9 @@ See log: ``` pm2 logs nimble_2 ```
 
 Run Same for 4xGPus, 8xGPUs, just remember change **CUDA_VISIBLE_DEVICES** number
 
+# Show logs
+``` make logs ```
+![image](https://github.com/b5prolh/nimble-miner-public/assets/18376326/f93ff3b5-f69e-45cd-8553-404519e70f74)
 
 
 # Some command for pm2
@@ -102,3 +105,6 @@ using CTRL + C to close logs session to continue using your terminal
 
 ## See list session
 ``` pm2 list ```
+
+# Contact
+you can contact me if have any 
