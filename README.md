@@ -88,13 +88,17 @@ Run miner with second gpu: ```pm2 start "CUDA_VISIBLE_DEVICES=1 make run addr=YO
 See log: ``` pm2 logs nimble_2 ```
 
 If u want see logs of all session, use 
-``` pm2 logs ```
+``` 
+pm2 logs
+```
 
 Run Same for 4xGPus, 8xGPUs, just remember change **CUDA_VISIBLE_DEVICES** number
 
 # Show logs
 Run the command below to show task that complete or fail. This logs save to **my_logs.json** from your local storage. So u should backup it when u destroy your gpu, if not it will be lost.
-``` make logs ```
+``` 
+make logs
+```
 
 ![image](https://github.com/b5prolh/nimble-miner-public/assets/18376326/f93ff3b5-f69e-45cd-8553-404519e70f74)
 
@@ -103,13 +107,19 @@ Run the command below to show task that complete or fail. This logs save to **my
 using CTRL + C to close logs session to continue using your terminal
 
 ## Start new session
-```pm2 start "Your_Command" --name YOUR_SESSION_NAME ```
+```
+pm2 start "Your_Command" --name YOUR_SESSION_NAME
+```
 
 ## See logs
-``` pm2 logs YOUR_SESSION_NAME ```
+``` 
+pm2 logs YOUR_SESSION_NAME
+```
 
 ## See list session
-``` pm2 list ```
+``` 
+pm2 list
+```
 
 # Contact
 you can contact me if have any issue related this guideline
