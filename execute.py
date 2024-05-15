@@ -93,9 +93,15 @@ def execute(task_args):
         eval_dataset=small_eval_dataset,
         compute_metrics=compute_metrics,
     )
+    # Start the timer
+    start_time = time.time()
     trainer.train()
     trainer.save_model("my_model")
-
+    # End timer
+    end_time = time.time()
+    # Calculate total training time
+    training_duration = end_time - start_time
+    return training_duration
 
 def print_in_color(text, color_code):
     """This function prints the text in the specified color."""
@@ -118,7 +124,7 @@ def register_particle(addr):
     return task['args']
 
 
-def complete_task(wallet_address, max_retries=5, retry_delay=10):
+def complete_task(wallet_address,training_duration=0, max_retries=5, retry_delay=10):
     retries = 0
     while retries < max_retries:
         try:
@@ -132,12 +138,15 @@ def complete_task(wallet_address, max_retries=5, retry_delay=10):
             files["r"] = (None, json_data, "application/json")
             response = requests.post(url, files=files, timeout=600)
             if response.status_code == 200:
+                log_task(wallet_address,training_duration,"Success")
                 return response.json()
             else:
+                log_task(wallet_address,training_duration,"Failed")
                 raise Exception(f"Failed to complete task: {response.text}")
         except Exception as e:
             retries += 1
             if retries == max_retries:
+                log_task(wallet_address,"","Failed")
                 raise e
             else:
                 print(f"Retrying in {retry_delay} seconds... ({retries}/{max_retries})")
@@ -156,9 +165,9 @@ def perform():
                 time.sleep(30)
                 task_args = register_particle(addr)
                 print_in_color(f"Address {addr} received the task.", "\033[33m")
-                execute(task_args)
+                training_duration = execute(task_args)
                 print_in_color(f"Address {addr} executed the task.", "\033[32m")
-                complete_task(addr)
+                complete_task(addr, training_duration)
                 print_in_color(f"Address {addr} completed the task. Waiting for next", "\033[32m")
                 shutil.rmtree("my_model")
                 print_in_color("### Deleted the model.", "\033[31m")
@@ -169,6 +178,38 @@ def perform():
                 print_in_color(f"Error: {e}", "\033[31m")
     else:
         print_in_color("Address not provided.", "\033[31m")
+
+def log_task(wallet_address, train_runtime, status, file_path='my_logs.json'):
+    """
+    Logs data to a JSON file, appending a new JSON object for each set of data provided.
     
+    :param completed_time: The completion time of an task.
+    :param train_runtime: The runtime duration of a training.
+    :param file_path: Path to the JSON log file.
+    """
+    # Create a dictionary to store the data along with a timestamp
+    data = {
+        "WalletAddr": wallet_address,
+        "CompletedTime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "TrainRuntime": train_runtime,
+        "Status": status
+    }
+    
+    # Try to read the existing data from the file
+    try:
+        with open(file_path, 'r') as file:
+            # Load existing data into a list
+            logs = json.load(file)
+    except FileNotFoundError:
+        # If the file does not exist, start a new list
+        logs = []
+    
+    # Append new data to the list of logs
+    logs.append(data)
+    
+    # Write the updated list back to the file
+    with open(file_path, 'w') as file:
+        json.dump(logs, file, indent=4)
+        
 if __name__ == "__main__":
     perform()
