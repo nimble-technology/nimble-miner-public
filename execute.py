@@ -133,8 +133,8 @@ def get_gpu_name():
         # Split the result to get each GPU name
         gpu_names = result.stdout.strip().split('\n')
         return gpu_names
-    except subprocess.CalledProcessError as e:
-        print(f"An error occurred while running nvidia-smi: {e.stderr}")
+    except Exception as e:
+        print(f"An error occurred while running nvidia-smi: {e}")
         return []
 
 
