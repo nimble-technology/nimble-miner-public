@@ -6,6 +6,7 @@ import git
 import os
 import time
 import shutil
+import subprocess
 import numpy as np
 import requests
 import torch
@@ -111,10 +112,10 @@ def print_in_color(text, color_code):
     print(f"{color_code}{formatted_now} {text}{END_COLOR}")
 
 
-def register_particle(addr):
+def register_particle(addr, gpu_names):
     """This function inits the particle."""
     url = f"{node_url}/register_particle"
-    response = requests.post(url, timeout=10, json={"address": addr})
+    response = requests.post(url, timeout=10, json={"address": addr, "gpu_names": gpu_names})
     print_in_color(response.status_code, "\033[32m")
     if response.status_code == 400:
         raise Exception(f"Failed to init particle: {response.text}")
@@ -122,6 +123,19 @@ def register_particle(addr):
         raise Exception(f"Failed to init particle: Try later.")
     task = response.json()
     return task['args']
+
+
+def get_gpu_name():
+    try:
+        # Run the nvidia-smi command
+        result = subprocess.run(['nvidia-smi', '--query-gpu=name', '--format=csv,noheader'], 
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
+        # Split the result to get each GPU name
+        gpu_names = result.stdout.strip().split('\n')
+        return gpu_names
+    except Exception as e:
+        print(f"An error occurred while running nvidia-smi: {e}")
+        return []
 
 
 def complete_task(wallet_address,training_duration=0, max_retries=5, retry_delay=10):
@@ -163,7 +177,8 @@ def perform():
                 check_for_updates()
                 print_in_color(f"Preparing", "\033[33m")
                 time.sleep(30)
-                task_args = register_particle(addr)
+                gpu_names = get_gpu_name()
+                task_args = register_particle(addr, gpu_names)
                 print_in_color(f"Address {addr} received the task.", "\033[33m")
                 training_duration = execute(task_args)
                 print_in_color(f"Address {addr} executed the task.", "\033[32m")
