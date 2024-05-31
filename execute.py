@@ -10,6 +10,7 @@ import subprocess
 import numpy as np
 import requests
 import torch
+import random
 from datetime import datetime
 now = datetime.now()
 from datasets import load_dataset
@@ -55,6 +56,10 @@ def check_disk_space():
 
 def execute(task_args):
     """This function executes the task."""
+    np.random.seed(task_args['seed'])
+    random.seed(task_args['seed'])
+    torch.manual_seed(task_args['seed'])
+
     print_in_color("Starting training...", "\033[34m")  # Blue for start
 
     tokenizer = AutoTokenizer.from_pretrained(task_args["model_name"])
@@ -84,7 +89,7 @@ def execute(task_args):
     )
 
     training_args = TrainingArguments(
-        output_dir="my_model", evaluation_strategy="epoch", save_strategy='epoch', seed=task_args['seed']
+        output_dir="my_model", evaluation_strategy="epoch", save_strategy='epoch', seed=task_args['seed'], full_determinism=True
     )
 
     trainer = Trainer(
