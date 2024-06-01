@@ -17,7 +17,7 @@ Core i7 13700
 This guideline will use pm2 to handle the session to run with multiple GPUs, 2x4090, 4x3090... that can be rented here: [VAST](https://cloud.vast.ai/?ref_id=120915)
 
 # Rent GPUs
-This guidline is working well with the **Cuda:12.0.1-Devel-Ubuntu22.04** template, you can copy and paste like so
+This guidline is works well with **Cuda:12.0.1-Devel-Ubuntu22.04** template, you can copy and paste like so
 ![image](https://github.com/b5prolh/nimble-miner-public/assets/18376326/b1e13f1b-3c6d-46f8-8862-95676717841a)
 
 If this is the first time you've used vast and dont know how to connect, please watch this short instructional video: https://www.youtube.com/watch?v=KraLVgFS4vU
