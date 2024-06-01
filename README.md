@@ -23,7 +23,7 @@ This guide works well with the **Cuda:12.0.1-Devel-Ubuntu22.04** template:
 If this is the first time you've used vast and dont know how to connect, please watch this short instructional video: https://www.youtube.com/watch?v=KraLVgFS4vU
 
 # Install
-Copy these commands and paste them into the terminal. Make sure u select the correct template **Cuda:12.0.1-Devel-Ubuntu22.04**. If not, you should copy and paste the following, line by line.
+Copy these commands and paste them into the terminal. Make sure u select the correct template **Cuda:12.0.1-Devel-Ubuntu22.04**. If not, you should copy and paste the following code, line by line.
 
 ```
 apt-get update -y && apt-get upgrade -y && apt install build-essential
