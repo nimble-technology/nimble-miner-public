@@ -1,10 +1,10 @@
 # Nimble Miner Setup Guide
-Welcome to the Nimble Miner setup guide. This document is designed to help you get started with the Nimble Miner, a tool forked from https://github.com/nimble-technology/nimble-miner-public to show your logs for how many successful tasks you've completed. I've structured this guide to make the setup process as straightforward as possible.
+Welcome to the Nimble Miner setup guide. This document is designed to help you get started with the Nimble Miner, a tool forked from https://github.com/nimble-technology/nimble-miner-public to show your logs for how many successful tasks you've completed. I've structured this guide to make the setup process as intuitive as possible.
 
 # Introduction
-The Nimble Miner allows users to contribute to the Nimble Network by performing AI inference tasks in exchange for rewards. This guide will take you through the necessary steps to set up your mining operation.
+The Nimble Miner allows users to contribute to the Nimble Network by performing AI inference tasks in exchange for rewards. This guide will take you through the necessary steps to set up your mining operations.
 
-For curious readers to learn more about how to start please read here first: https://discord.com/channels/1139328143400894604/1165053157391478825/1225876548255744121
+For curious readers to learn more about how to get started please read here first: https://discord.com/channels/1139328143400894604/1165053157391478825/1225876548255744121
 
 # System Specifications
 ``` RTX 3080+ GPU
@@ -14,16 +14,16 @@ Core i7 13700
 ```
 
 # Installation
-This guide will use pm2 to handle the session to run with multiple GPUs, 2x4090, 4x3090... that can be rented here: [VAST](https://cloud.vast.ai/?ref_id=120915)
+This guide will use pm2 to handle the session to run multiple GPUs, 2x4090, 4x3090... that can be rented here: [VAST](https://cloud.vast.ai/?ref_id=120915)
 
 # Rent GPUs
-This guide works well with **Cuda:12.0.1-Devel-Ubuntu22.04** template, you can copy and paste like so
+This guide works well with the **Cuda:12.0.1-Devel-Ubuntu22.04** template, you can copy and paste like so
 ![image](https://github.com/b5prolh/nimble-miner-public/assets/18376326/b1e13f1b-3c6d-46f8-8862-95676717841a)
 
 If this is the first time you've used vast and dont know how to connect, please watch this short instructional video: https://www.youtube.com/watch?v=KraLVgFS4vU
 
 # Install
-Just copy the following commands and paste them into the terminal. Make sure u select the correct template **Cuda:12.0.1-Devel-Ubuntu22.04**. If not, you should copy and paste line by line.
+Copy these commands and paste them into the terminal. Make sure u select the correct template **Cuda:12.0.1-Devel-Ubuntu22.04**. If not, you should copy and paste the following, line by line.
 
 ```
 apt-get update -y && apt-get upgrade -y && apt install build-essential
@@ -74,7 +74,7 @@ cd && cd $HOME/nimble && cd wallet-public
 ./nimble-networkd keys add YOUR_WALLET_NAME
 
 ```
-After you've entered your passphrase, your wallet shoud be successfully created and the output “address: nimblexxxx” is confirmation of that!
+After you've entered your passphrase, your wallet will be created and the output “address: nimblexxxx” is confirmation it was successful.
 Copy the generated Nimble Address and save your wallet information in a safe place.
 
 # Recover your wallet
@@ -84,7 +84,7 @@ cd && cd $HOME/nimble && cd wallet-public
 ./nimble-networkd keys add YOUR_WALLET_NAME --recover
 ```
 
-After you've entered your seed phrase and pass phrase, your wallet should now be successfully created and the output “address: nimblexxxx” is confirmation of that!
+After you've entered your seedphrase and passphrase, your wallet will be created and the output “address: nimblexxxx” is confirmation it was successful.
 
 # Run miner
 ## 1xGPUs
@@ -132,14 +132,14 @@ pm2 list
 ```
 
 # Contact
-you can contact me if have any issues related this guide
+you can contact me if have any issues related to this guide
 Discord: mytt0918
 [Telegram](https://t.me/OxCaos)
 [Twitter](https://twitter.com/kiwigamefi)
 
 
 # Donate
-If you would like to buy me starbucks, consider doing so to one of the addresses below:
+If you would like to buy me starbucks, consider doing so by making a small domation to one of the addresses below:
 
 TRC20 
 ``` 
@@ -154,4 +154,4 @@ Sol
 7ixWCfwk3xVoYkr2utfCkdqG3cVcUTJQ8cZJmpioGH5g 
 ```
 
-Many thanks and I hope we will all become rich from mining these precious NIM tokens!
+Many thanks and I hope we will all become rich and prosperous from mining these precious NIM tokens!
