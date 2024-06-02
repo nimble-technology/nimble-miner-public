@@ -168,7 +168,7 @@ def complete_task(wallet_address,training_duration=0, max_retries=5, retry_delay
                 log_task(wallet_address,"","Failed")
                 raise e
             else:
-                print(f"Retrying in {retry_delay} seconds... ({retries}/{max_retries})")
+                print(f"Retrying for up to 10 minutes... ({retries} of {max_retries}) - task submission upload requires outward public network connection")
                 time.sleep(retry_delay)
 
 
