@@ -18,7 +18,7 @@ from transformers import (AutoModelForSequenceClassification, AutoTokenizer,
                           Trainer, TrainingArguments)
 
 
-node_url = "https://mainnet.nimble.technology:443"
+node_url = "https://evaluator.nimble.technology:443"
 git_repo_url = "https://github.com/nimble-technology/nimble-miner-public.git"
 
 
