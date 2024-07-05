@@ -52,7 +52,7 @@ def check_disk_space():
     print_in_color(f"Total: {total / (2**30):.2f} GB", "\033[31m")
     print_in_color(f"Used: {used / (2**30):.2f} GB", "\033[31m")
     print_in_color(f"Free: {free / (2**30):.2f} GB", "\033[31m")
-  
+
 
 def execute(task_args):
     """This function executes the task."""
@@ -109,6 +109,7 @@ def execute(task_args):
     training_duration = end_time - start_time
     return training_duration
 
+
 def print_in_color(text, color_code):
     """This function prints the text in the specified color."""
     END_COLOR = "\033[0m"
@@ -117,15 +118,20 @@ def print_in_color(text, color_code):
     print(f"{color_code}{formatted_now} {text}{END_COLOR}")
 
 
-def register_particle(addr, gpu_names):
+def register_particle(master_wallet, addr, gpu_names):
     """This function inits the particle."""
     url = f"{node_url}/register_particle"
-    response = requests.post(url, timeout=10, json={"address": addr, "gpu_names": gpu_names})
+    payload = {"address": addr, "gpu_names": gpu_names}
+    if master_wallet is not None:
+        payload["master_wallet"] = master_wallet
+    response = requests.post(url, timeout=10, json=payload)
     print_in_color(response.status_code, "\033[32m")
     if response.status_code == 400:
         raise Exception(f"Failed to init particle: {response.text}")
+    if response.status_code == 403:
+        raise Exception(f"Failed to init particle: {response.text}")
     if response.status_code != 200:
-        raise Exception(f"Failed to init particle: Try later.")
+        raise Exception("Failed to init particle: Try later.")
     task = response.json()
     return task['args']
 
@@ -143,7 +149,7 @@ def get_gpu_name():
         return []
 
 
-def complete_task(wallet_address,training_duration=0, max_retries=5, retry_delay=10):
+def complete_task(wallet_address, training_duration=0, max_retries=5, retry_delay=10):
     retries = 0
     while retries < max_retries:
         try:
@@ -173,17 +179,22 @@ def complete_task(wallet_address,training_duration=0, max_retries=5, retry_delay
 
 
 def perform():
-    addr = sys.argv[1] 
+    addr = sys.argv[1]
+    # Check if master_wallet is provided
+    master_wallet = sys.argv[2] if len(sys.argv) > 2 else None
     if addr is not None:
         print_in_color(f"Address {addr} started to work.", "\033[33m")
+        if master_wallet is not None:
+            print_in_color(f"Master wallet address {master_wallet} started to work.", "\033[33m")
         while True:
             try:
                 print_in_color("### Checking for updated miner:", "\033[31m")
                 check_for_updates()
-                print_in_color(f"Preparing", "\033[33m")
+                print_in_color("Preparing", "\033[33m")
                 time.sleep(30)
                 gpu_names = get_gpu_name()
-                task_args = register_particle(addr, gpu_names)
+
+                task_args = register_particle(master_wallet, addr, gpu_names)
                 print_in_color(f"Address {addr} received the task.", "\033[33m")
                 training_duration = execute(task_args)
                 print_in_color(f"Address {addr} executed the task.", "\033[32m")
@@ -198,6 +209,7 @@ def perform():
                 print_in_color(f"Error: {e}", "\033[31m")
     else:
         print_in_color("Address not provided.", "\033[31m")
+
 
 def log_task(wallet_address, train_runtime, status, file_path='my_logs.json'):
     """
@@ -230,6 +242,7 @@ def log_task(wallet_address, train_runtime, status, file_path='my_logs.json'):
     # Write the updated list back to the file
     with open(file_path, 'w') as file:
         json.dump(logs, file, indent=4)
-        
+
+
 if __name__ == "__main__":
     perform()
