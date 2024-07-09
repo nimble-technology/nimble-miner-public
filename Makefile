@@ -12,8 +12,10 @@ ifndef addr
 	$(error addr is not set.)
 endif
 ifdef master_wallet
+	@echo "----------------------------------"
 	@echo "Starting Process for Address $(addr) with Master Wallet: $(master_wallet)"
 else
+	@echo "----------------------------------"
 	@echo "Starting Process for Address $(addr)"
 endif
 	
@@ -22,8 +24,10 @@ endif
 	
 ifdef master_wallet
 	@echo "Process Completed for Address $(addr) with Master Wallet: $(master_wallet)"
+	@echo "----------------------------------"
 else
 	@echo "Process Completed for Address $(addr)"
+	@echo "----------------------------------"
 endif
 
 check:
