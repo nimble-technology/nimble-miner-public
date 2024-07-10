@@ -11,14 +11,24 @@ run:
 ifndef addr
 	$(error addr is not set.)
 endif
+ifdef master_wallet
+	@echo "----------------------------------"
+	@echo "Starting Process for Address $(addr) with Master Wallet: $(master_wallet)"
+else
 	@echo "----------------------------------"
 	@echo "Starting Process for Address $(addr)"
+endif
 	
 	source ./nimenv_localminers/bin/activate && \
-	python execute.py $(addr)
+	python execute.py $(addr) $(master_wallet)
 	
+ifdef master_wallet
+	@echo "Process Completed for Address $(addr) with Master Wallet: $(master_wallet)"
+	@echo "----------------------------------"
+else
 	@echo "Process Completed for Address $(addr)"
 	@echo "----------------------------------"
+endif
 
 check:
 	@echo "----------------------------------"
@@ -32,6 +42,3 @@ logs:
 	python showlogs.py
 	
 	@echo "----------------------------------"
-
-
-
