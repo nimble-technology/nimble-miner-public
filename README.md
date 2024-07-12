@@ -1,10 +1,10 @@
 # Nimble Miner Setup Guide
-Welcome to the Nimble Miner setup guide. This document is designed to help you get started with the Nimble Miner, a tool that fork from https://github.com/nimble-technology/nimble-miner-public to show your task complete logs. I've structured this guide to make the setup process as straightforward as possible.
+Welcome to the Nimble Miner setup guide. This document is designed to help you get started with the Nimble Miner, a tool forked from https://github.com/nimble-technology/nimble-miner-public to show your logs for how many successful tasks you've completed. I've structured this guide to make the setup process as intuitive as possible.
 
 # Introduction
-Nimble Miner allows users to contribute to the Nimble network by performing AI inference tasks in exchange for rewards. This guide will take you through the necessary steps to set up your mining operation.
+The Nimble Miner allows users to contribute to the Nimble Network by performing AI inference tasks in exchange for rewards. This guide will take you through the necessary steps to set up your mining operations.
 
-For curious readers to learn more about how to start please read it first https://discord.com/channels/1139328143400894604/1165053157391478825/1225876548255744121
+For curious readers to learn more about how to get started please read here first: https://discord.com/channels/1139328143400894604/1165053157391478825/1225876548255744121
 
 # System Specifications
 ``` RTX 3080+ GPU
@@ -14,16 +14,16 @@ Core i7 13700
 ```
 
 # Installation
-This guideline will use pm2 to handle session to run with multiple GPUs like 2x4090, 4x3090... that rent on [VAST](https://cloud.vast.ai/?ref_id=120915)
+This guide will use pm2 to handle the session to run multiple GPUs, 2x4090, 4x3090... that can be rented here: [VAST](https://cloud.vast.ai/?ref_id=120915)
 
 # Rent GPUs
-This guidline working good with **Cuda:12.0.1-Devel-Ubuntu22.04** template for only one times to copy and paste
+This guide works well with the **Cuda:12.0.1-Devel-Ubuntu22.04** template:
 ![image](https://github.com/b5prolh/nimble-miner-public/assets/18376326/b1e13f1b-3c6d-46f8-8862-95676717841a)
 
-If this is first time you use vast and dont know how to connect, please see it first: https://www.youtube.com/watch?v=KraLVgFS4vU
+If this is the first time you've used vast and dont know how to connect, please watch this short instructional video: https://www.youtube.com/watch?v=KraLVgFS4vU
 
 # Install
-Just coppy all these command and past to your terminal. Make sure u select correct template **Cuda:12.0.1-Devel-Ubuntu22.04**. If not, should copy line by line
+Copy these commands and paste them into the terminal. Make sure u select the correct template **Cuda:12.0.1-Devel-Ubuntu22.04**. If not, you should copy and paste the following code, line by line.
 
 ```
 apt-get update -y && apt-get upgrade -y && apt install build-essential
@@ -74,38 +74,38 @@ cd && cd $HOME/nimble && cd wallet-public
 ./nimble-networkd keys add YOUR_WALLET_NAME
 
 ```
-After you've entered your passphrase, your wallet shoud be successfully created and the “address: nimblexxxx” output can confirm that!
-Copy the generated Nimble address and save your wallet information in a safe place.
+After you've entered your passphrase, your wallet will be created and the output “address: nimblexxxx” is confirmation it was successful.
+Copy the generated Nimble Address and save your wallet information in a safe place.
 
-# Recover a wallet
-If you already have seed pharse of wallet, u can recover it by command
+# Recover your wallet
+If you already have a seed phrase for your wallet, u can recover it by running the following commands:
 ```
 cd && cd $HOME/nimble && cd wallet-public
 ./nimble-networkd keys add YOUR_WALLET_NAME --recover
 ```
 
-After you've entered your seed pharse and pass pharse, you wallet should be successfully create and the “address: nimblexxxx” output can confirm that!
+After you've entered your seedphrase and passphrase, your wallet will be created and the output “address: nimblexxxx” is confirmation it was successful.
 
 # Run miner
 ## 1xGPUs
 Run miner: ```pm2 start "CUDA_VISIBLE_DEVICES=0 make run addr=YOUR_SUBWALLET_1" --name nimble ```
 See log: ``` pm2 logs nimble```
 ## 2xGPUs
-Run miner with first gpu: ```pm2 start "CUDA_VISIBLE_DEVICES=0 make run addr=YOUR_SUBWALLET_1" --name nimble_1```
+Run miner with GPU1: ```pm2 start "CUDA_VISIBLE_DEVICES=0 make run addr=YOUR_SUBWALLET_1" --name nimble_1```
 See log: ``` pm2 logs nimble_1 ```
 
-Run miner with second gpu: ```pm2 start "CUDA_VISIBLE_DEVICES=1 make run addr=YOUR_SUBWALLET_1" --name nimble_2 ```
+Run miner with GPU2: ```pm2 start "CUDA_VISIBLE_DEVICES=1 make run addr=YOUR_SUBWALLET_1" --name nimble_2 ```
 See log: ``` pm2 logs nimble_2 ```
 
-If u want see logs of all session, use 
+If u want to see the logs of all of the sessions, please use: 
 ``` 
 pm2 logs
 ```
 
-Run Same for 4xGPus, 8xGPUs, just remember change **CUDA_VISIBLE_DEVICES** number
+You can run the same commands that you ran above, for 4xGPus, 8xGPUs and so on, just remember to change the **CUDA_VISIBLE_DEVICES** number.
 
 # Show logs
-Run the command below to show task that complete or fail. This logs save to **my_logs.json** from your local storage. So u should backup it when u destroy your gpu, if not it will be lost.
+Run the command below to show the tasks that completed or failed. This log will be saved to **my_logs.json** in your local storage. You should back it up when u destroy your instance, if not it will be lost.
 ``` 
 make logs
 ```
@@ -113,10 +113,10 @@ make logs
 ![image](https://github.com/b5prolh/nimble-miner-public/assets/18376326/f93ff3b5-f69e-45cd-8553-404519e70f74)
 
 
-# Some command for pm2
-using CTRL + C to close logs session to continue using your terminal
+# Some additional commands for pm2
+using CTRL + C to close your log session and continue using your terminal.
 
-## Start new session
+## Start a new session
 ```
 pm2 start "Your_Command" --name YOUR_SESSION_NAME
 ```
@@ -126,20 +126,20 @@ pm2 start "Your_Command" --name YOUR_SESSION_NAME
 pm2 logs YOUR_SESSION_NAME
 ```
 
-## See list session
+## List session
 ``` 
 pm2 list
 ```
 
 # Contact
-you can contact me if have any issue related this guideline
+you can contact me if have any issues related to this guide
 Discord: mytt0918
 [Telegram](https://t.me/OxCaos)
 [Twitter](https://twitter.com/kiwigamefi)
 
 
 # Donate
-If u want invite me a starbuck, give it to: 
+If you would like to buy me starbucks, consider doing so by making a small domation to one of the addresses below:
 
 TRC20 
 ``` 
@@ -154,4 +154,4 @@ Sol
 7ixWCfwk3xVoYkr2utfCkdqG3cVcUTJQ8cZJmpioGH5g 
 ```
 
-Many thanks and hope we will become richer by mine NIM
+Many thanks and I hope we will all become rich and prosperous from mining these precious NIM tokens!
