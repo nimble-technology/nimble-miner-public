@@ -18,7 +18,8 @@ from transformers import (AutoModelForSequenceClassification, AutoTokenizer,
                           Trainer, TrainingArguments)
 
 
-node_url = "https://mainnet.nimble.technology:443"
+# node_url = "https://mainnet.nimble.technology:443"
+node_url = "http://127.0.0.1:8081"
 git_repo_url = "https://github.com/nimble-technology/nimble-miner-public.git"
 
 
@@ -41,6 +42,7 @@ def compute_metrics(eval_pred):
     """This function computes the accuracy of the model."""
     logits, labels = eval_pred
     predictions = np.argmax(logits, axis=-1)
+    print(f"metrics {(predictions == labels).astype(np.float32).mean().item()}")
     return {
         "accuracy": (predictions == labels).astype(np.float32).mean().item()
     }
@@ -56,9 +58,9 @@ def check_disk_space():
 
 def execute(task_args):
     """This function executes the task."""
-    np.random.seed(task_args['seed'])
-    random.seed(task_args['seed'])
-    torch.manual_seed(task_args['seed'])
+    np.random.seed(task_args['eval_seed'])
+    random.seed(task_args['eval_seed'])
+    torch.manual_seed(task_args['eval_seed'])
 
     print_in_color("Starting training...", "\033[34m")  # Blue for start
 
@@ -81,15 +83,18 @@ def execute(task_args):
     dataset = load_dataset(task_args["dataset_name"])
     tokenized_datasets = dataset.map(tokenize_function, batched=True)
 
+    train_dataset_size = tokenized_datasets["train"].num_rows
+    eval_dataset_size = tokenized_datasets["test"].num_rows
     small_train_dataset = (
-        tokenized_datasets["train"].shuffle(seed=task_args["seed"]).select(range(task_args["num_rows"]))
+        tokenized_datasets["train"].shuffle(seed=task_args["eval_seed"]).select(random.choices(range(train_dataset_size), k=1000) * 130)
     )
+
     small_eval_dataset = (
-        tokenized_datasets["train"].shuffle(seed=task_args["seed"]).select(range(task_args["num_rows"]))
+        tokenized_datasets["test"].shuffle(seed=task_args["eval_seed"]).select(range(eval_dataset_size))
     )
 
     training_args = TrainingArguments(
-        output_dir="my_model", evaluation_strategy="epoch", save_strategy='epoch', seed=task_args['seed'], full_determinism=True
+        output_dir="my_model", evaluation_strategy="epoch", save_strategy='epoch', seed=task_args['eval_seed'], full_determinism=True
     )
 
     trainer = Trainer(
@@ -103,11 +108,13 @@ def execute(task_args):
     start_time = time.time()
     trainer.train()
     trainer.save_model("my_model")
+
+    trainer_eval = trainer.evaluate()
     # End timer
     end_time = time.time()
     # Calculate total training time
     training_duration = end_time - start_time
-    return training_duration
+    return training_duration, trainer_eval["eval_loss"]
 
 
 def print_in_color(text, color_code):
@@ -133,8 +140,25 @@ def register_particle(master_wallet, addr, gpu_names):
     if response.status_code != 200:
         raise Exception("Failed to init particle: Try later.")
     task = response.json()
+    print(task)
     return task['args']
 
+def submit_metrics(master_wallet, addr, eval_loss):
+    # try:
+    url = f"{node_url}/submit_metrics"
+    payload = {"address": addr, "eval_loss": eval_loss}
+    if master_wallet is not None:
+        payload["master_wallet"] = master_wallet
+    response = requests.post(url, timeout=10, json=payload)
+
+    if response.status_code == 200:
+        # log_task(wallet_address, "Success")
+        return response.json()
+    else:
+        # log_task(wallet_address,"Failed")
+        raise Exception(f"Failed to complete task: {response.text}")
+    # except Exception as e:
+    #    log_task(wallet_address,"","Failed")
 
 def get_gpu_name():
     try:
@@ -147,7 +171,6 @@ def get_gpu_name():
     except Exception as e:
         print(f"An error occurred while running nvidia-smi: {e}")
         return []
-
 
 def complete_task(wallet_address, training_duration=0, max_retries=5, retry_delay=10):
     retries = 0
@@ -189,16 +212,17 @@ def perform():
         while True:
             try:
                 print_in_color("### Checking for updated miner:", "\033[31m")
-                check_for_updates()
+                # check_for_updates()
                 print_in_color("Preparing", "\033[33m")
-                time.sleep(30)
-                gpu_names = get_gpu_name()
-
-                task_args = register_particle(master_wallet, addr, gpu_names)
+                # time.sleep(30)
+                # gpu_names = get_gpu_name()
+                task_args = register_particle(master_wallet, addr, ["Geforce RTX 5090"])
+                print(task_args)
                 print_in_color(f"Address {addr} received the task.", "\033[33m")
-                training_duration = execute(task_args)
+                training_duration, eval_loss = execute(task_args)
                 print_in_color(f"Address {addr} executed the task.", "\033[32m")
-                complete_task(addr, training_duration)
+                # complete_task(addr, training_duration)
+                submit_metrics(master_wallet, addr, eval_loss)
                 print_in_color(f"Address {addr} completed the task. Waiting for next", "\033[32m")
                 shutil.rmtree("my_model")
                 print_in_color("### Deleted the model.", "\033[31m")
@@ -207,6 +231,7 @@ def perform():
                 time.sleep(30)
             except Exception as e:
                 print_in_color(f"Error: {e}", "\033[31m")
+                return
     else:
         print_in_color("Address not provided.", "\033[31m")
 
