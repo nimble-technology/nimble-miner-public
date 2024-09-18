@@ -42,7 +42,7 @@ sudo apt-get install -y libcurl4-openssl-dev
 # Generate a wallet
 ``` 
 cd && cd $HOME/nimble && cd wallet-public
-./nimble-networkd keys add YOUR_WALLET_NAME --recover
+./nimble-networkd keys add YOUR_WALLET_NAME
 
 ```
 After you've entered your passphrase, your wallet shoud be successfully created and the “address: nimblexxxx” output can confirm that! Copy the generated Nimble address and save your wallet information in a safe place.
