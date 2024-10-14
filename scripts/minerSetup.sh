@@ -15,18 +15,11 @@ check_docker_installed() {
 
 # Function to check if Docker is running
 check_docker_running() {
-  if ! (docker info > /dev/null 2>&1); then
+  if ! (sudo docker info > /dev/null 2>&1); then
     return 1  # Docker is not running
   else
     return 0  # Docker is running
   fi
-}
-
-# Function to install Docker on macOS
-install_docker_mac() {
-  echo "Installing Docker on macOS..."
-  brew install --cask docker
-  echo "Docker installed. Please open Docker Desktop manually."
 }
 
 # Function to install Docker on Linux
@@ -111,14 +104,15 @@ get_host_port() {
 get_remote_docker_port(){
     echo "Requesting port from remote"
 
-    output=$(docker run --gpus all --runtime=nvidia ubuntu nvidia-smi --query-gpu=name,memory.total --format=csv,noheader,nounits)
-    IFS=',' read -r GPU_NAME GPU_MEMORY <<< "$output"
+    output=$(sudo docker run --gpus all --runtime=nvidia ubuntu nvidia-smi --query-gpu=name,uuid,memory.total --format=csv,noheader,nounits)
+    IFS=',' read -r GPU_NAME GPU_UUID GPU_MEMORY <<< "$output"
     # get gpu model and memory
     resp=$(curl -s -X POST http://"$HUB_DOMAIN":8000/hub/api/port \
         -H "Content-Type: application/json" \
         -d "{
-          \"publicKey\": \"$PUB_KEY\",
-          \"machine\": \"$GPU_NAME\",
+          \"public_key\": \"$PUB_KEY\",
+          \"uuid\": \"$GPU_UUID\",
+          \"gpu_name\": \"$GPU_NAME\",
           \"memory\": \"$GPU_MEMORY\",
           \"port\": \"$DOCKER_PORT\",
           \"ip\": \"$LOCAL_IP\"
@@ -145,6 +139,27 @@ get_remote_docker_port(){
     DOCKER_PORT="$NEW_DOCKER_PORT"
 }
 
+upload_pub_key(){
+    output=$(sudo docker run --gpus all --runtime=nvidia ubuntu nvidia-smi --query-gpu=name,uuid,memory.total --format=csv,noheader,nounits)
+    echo "$output"
+    IFS=',' read -r GPU_NAME GPU_UUID GPU_MEMORY <<< "$output"
+    resp=$(curl -s -X POST http://"$HUB_DOMAIN":8000/hub/api/public-key \
+        -H "Content-Type: application/json" \
+        -d "{
+          \"public_key\": \"$PUB_KEY\",
+          \"gpu_name\": \"$GPU_NAME\",
+          \"memory\": \"$GPU_MEMORY\",
+          \"uuid\": \"$GPU_UUID\",
+          \"ip\": \"$LOCAL_IP\"
+        }")
+    if echo "$resp" | jq -e '.msg == "upload pub key success"' > /dev/null; then
+        echo "Upload pub key succeeded"
+    else
+        echo "Error: Upload pub key failed. Response: $resp"
+        exit 1
+    fi
+}
+
 if [ $# -lt 4 ]; then
     echo "Usage: $0 <REMOTE_USER> <HUB_HOST> <HUB_DOMAIN> <PUB_KEY_PATH>"
     exit 1
@@ -159,8 +174,6 @@ DOCKER_PORT=-1
 LOCAL_IP=$(ip addr show | grep "inet " | grep -v 127.0.0.1 |grep -v docker0 | awk '{print $2}' | cut -d/ -f1)
 
 echo "Run the script with sudo."
-#read -r -p "
-#Please enter the full path of the public key file, and make sure only one pub key in this file: " PUB_KEY_PATH
 
 PUB_KEY_PATH=$(eval echo "$PUB_KEY_PATH")
 
@@ -189,21 +202,13 @@ else
   install_docker_linux
 fi
 
-echo "Installing CUDA dependencies..."
-curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor --yes -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
-&& curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
-sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
-sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
-
-#sudo apt-get update; sudo apt-get install -y nvidia-container-toolkit nvidia-utils-550-server nvidia-driver-550
-sudo nvidia-ctk runtime configure --runtime=docker
-
-
 # Associative array to store container and port mapping
 declare -A container_port_map
 
 
 ssh-keyscan -H "$HUB_HOST" >> ~/.ssh/known_hosts
+
+upload_pub_key
 
 LABEL_KEY="maintainer"
 LABEL_VALUE="nimbleTechnology"
