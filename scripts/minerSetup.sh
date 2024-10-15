@@ -231,7 +231,7 @@ else
 fi
 
 check_and_setup_userns_remap
-ssh-keyscan -H "$HUB_HOST" >> ~/.ssh/known_hosts
+ssh-keyscan -H "$HUB_DOMAIN" >> ~/.ssh/known_hosts
 upload_pub_key
 
 # Associative array to store container and port mapping
