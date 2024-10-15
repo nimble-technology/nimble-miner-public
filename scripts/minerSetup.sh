@@ -1,8 +1,6 @@
 #!/bin/bash
 # abort when fail
-#set -e
-# debug
-#set -x
+set -e
 
 # Function to check if Docker is installed
 check_docker_installed() {
@@ -66,7 +64,7 @@ start_ssh_tunnel() {
     local host_port=$1
     echo "Starting SSH port forwarding on port $host_port"
 
-    ssh -N -R "${HUB_HOST}:${host_port}:localhost:${host_port}" "${REMOTE_USER}@${HUB_HOST}" 2>&1 &
+    ssh -N -R "${HUB_DOMAIN}:${host_port}:localhost:${host_port}" "${REMOTE_USER}@${HUB_DOMAIN}" 2>&1 &
     ssh_pid=$!
 
     sleep 2  # make sure it started
@@ -131,7 +129,7 @@ check_and_setup_userns_remap() {
 get_remote_docker_port(){
     echo "Requesting port from remote"
 
-    output=$(sudo docker run --gpus all --runtime=nvidia ubuntu nvidia-smi --query-gpu=name,uuid,memory.total --format=csv,noheader,nounits)
+    output=$(sudo docker run --rm --gpus all --runtime=nvidia ubuntu nvidia-smi --query-gpu=name,uuid,memory.total --format=csv,noheader,nounits)
     IFS=',' read -r GPU_NAME GPU_UUID GPU_MEMORY <<< "$output"
     # get gpu model and memory
     resp=$(curl -s -X POST http://"$HUB_DOMAIN":8000/hub/api/port \
@@ -167,7 +165,7 @@ get_remote_docker_port(){
 }
 
 upload_pub_key(){
-    output=$(sudo docker run --gpus all --runtime=nvidia ubuntu nvidia-smi --query-gpu=name,uuid,memory.total --format=csv,noheader,nounits)
+    output=$(sudo docker run --rm --gpus all --runtime=nvidia ubuntu nvidia-smi --query-gpu=name,uuid,memory.total --format=csv,noheader,nounits)
     echo "$output"
     IFS=',' read -r GPU_NAME GPU_UUID GPU_MEMORY <<< "$output"
     resp=$(curl -s -X POST http://"$HUB_DOMAIN":8000/hub/api/public-key \
@@ -188,14 +186,13 @@ upload_pub_key(){
 }
 
 if [ $# -lt 4 ]; then
-    echo "Usage: $0 <REMOTE_USER> <HUB_HOST> <HUB_DOMAIN> <PUB_KEY_PATH>"
+    echo "Usage: $0 <REMOTE_USER> <HUB_DOMAIN> <PUB_KEY_PATH>"
     exit 1
 fi
 
 REMOTE_USER=$1
-HUB_HOST=$2
-HUB_DOMAIN=$4
-PUB_KEY_PATH=$3
+HUB_DOMAIN=$3
+PUB_KEY_PATH=$2
 PUB_KEY=""
 DOCKER_PORT=-1
 LOCAL_IP=$(ip addr show | grep "inet " | grep -v 127.0.0.1 |grep -v docker0 | awk '{print $2}' | cut -d/ -f1)
