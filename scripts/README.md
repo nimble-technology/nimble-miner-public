@@ -39,3 +39,11 @@ chmod +x startMinerSetup.sh
 ```
 
 That’s it! You’re ready to begin mining.
+
+## Step 4: Monitor your miner app
+```
+# show running containers
+docker ps 
+# get logs from container
+docker logs container_id
+```

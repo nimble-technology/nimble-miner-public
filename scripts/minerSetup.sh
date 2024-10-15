@@ -1,6 +1,6 @@
 #!/bin/bash
 # abort when fail
-set -e
+#set -e
 
 # Function to check if Docker is installed
 check_docker_installed() {
