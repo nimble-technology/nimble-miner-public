@@ -143,6 +143,14 @@ get_remote_docker_port(){
           \"ip\": \"$LOCAL_IP\"
         }")
     echo "port resp=$resp"
+
+    if echo "$resp" | jq . >/dev/null 2>&1; then
+        NEW_DOCKER_PORT=$(echo "$resp" | jq -r '.port')
+    else
+        echo "Error: Invalid JSON received: $resp"
+        return 0
+    fi
+
     NEW_DOCKER_PORT=$(echo "$resp" | jq -r '.port')
 
     if [ -z "$NEW_DOCKER_PORT" -o "$NEW_DOCKER_PORT" = "null" ] || ! [[ "$NEW_DOCKER_PORT" =~ ^[0-9]+$ ]]; then
