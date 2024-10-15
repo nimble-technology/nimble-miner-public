@@ -185,7 +185,7 @@ upload_pub_key(){
     fi
 }
 
-if [ $# -lt 4 ]; then
+if [ $# -lt 3 ]; then
     echo "Usage: $0 <REMOTE_USER> <HUB_DOMAIN> <PUB_KEY_PATH>"
     exit 1
 fi
