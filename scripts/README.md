@@ -27,7 +27,7 @@ sudo nvidia-ctk runtime configure --runtime=docker
 
 ```
 ## Step 3: Run the Mining Script
-Download the script from the provided link. This script will read your SSH public key from the default location (~/.ssh/id_rsa.pub). If your key is stored in a different location, you can modify the script accordingly.
+Download the script using the following commands. This script will read your SSH public key from the default location (~/.ssh/id_rsa.pub). If your key is stored in a different location, you can modify the script accordingly.
 
 Once you’ve downloaded the script, ensure the current user has sudo privileges, execute it (without sudo).
 ```
