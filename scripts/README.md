@@ -31,6 +31,8 @@ Download the script from the provided link. This script will read your SSH publi
 
 Once you’ve downloaded the script, ensure the current user has sudo privileges, execute it (without sudo).
 ```
+wget -O minerSetup.sh https://raw.githubusercontent.com/nimble-technology/nimble-miner-public/PROD-2342-miner-readme/scripts/minerSetup.sh 
+wget -O startMinerSetup.sh https://raw.githubusercontent.com/nimble-technology/nimble-miner-public/PROD-2342-miner-readme/scripts/startMinerSetup.sh
 chmod +x startMinerSetup.sh
 ./startMinerSetup.sh
 ```
