@@ -16,6 +16,7 @@ Explanation:
 
 By default, the public key file will be located at /home/your_username/.ssh/id_rsa. If you choose a different location, make sure to remember it as you’ll need it later.
 ## Step 2: Prepare the Environment on Your GPU Machine
+Just copy all these command and paste to your terminal.
 ```
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor --yes -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
 && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
