@@ -101,6 +101,33 @@ get_host_port() {
     sudo docker port "$container_id" "$CONTAINER_PORT" | awk -F: '{print $2}'
 }
 
+
+# after set "userns-remap", docker can not have root permission of the host
+check_and_setup_userns_remap() {
+    DOCKER_CONFIG_FILE="/etc/docker/daemon.json"
+
+    # Check if the Docker configuration file exists
+    if [ ! -f "$DOCKER_CONFIG_FILE" ]; then
+        echo "Docker configuration file does not exist. Creating a new file..."
+        echo -e "{\n  \"userns-remap\": \"default\"\n}" > "$DOCKER_CONFIG_FILE"
+        echo "Added 'userns-remap' configuration and restarting Docker service..."
+        sudo systemctl restart docker
+        return
+    fi
+
+    # Check if the 'userns-remap' configuration already exists
+    if grep -q '"userns-remap"' "$DOCKER_CONFIG_FILE"; then
+        echo "'userns-remap' configuration already exists. No changes needed."
+    else
+        echo "'userns-remap' configuration not found. Adding the configuration..."
+        TMP_FILE=$(mktemp)
+        jq '. + {"userns-remap": "default"}' "$DOCKER_CONFIG_FILE" > "$TMP_FILE" && mv "$TMP_FILE" "$DOCKER_CONFIG_FILE"
+        echo "'userns-remap' configuration added. Restarting Docker service..."
+        sudo systemctl restart docker
+    fi
+}
+
+
 get_remote_docker_port(){
     echo "Requesting port from remote"
 
@@ -172,10 +199,14 @@ PUB_KEY_PATH=$3
 PUB_KEY=""
 DOCKER_PORT=-1
 LOCAL_IP=$(ip addr show | grep "inet " | grep -v 127.0.0.1 |grep -v docker0 | awk '{print $2}' | cut -d/ -f1)
-
-echo "Run the script with sudo."
-
 PUB_KEY_PATH=$(eval echo "$PUB_KEY_PATH")
+
+LABEL_KEY="maintainer"
+LABEL_VALUE="nimbleTechnology"
+CONTAINER_PORT="8888"
+CHECK_INTERVAL=10 # 10 seconds
+retries=0
+max_retries=50
 
 if [ ! -f "$PUB_KEY_PATH" ]; then
     echo "Error: The specified file does not exist."
@@ -202,20 +233,12 @@ else
   install_docker_linux
 fi
 
-# Associative array to store container and port mapping
-declare -A container_port_map
-
-
+check_and_setup_userns_remap
 ssh-keyscan -H "$HUB_HOST" >> ~/.ssh/known_hosts
-
 upload_pub_key
 
-LABEL_KEY="maintainer"
-LABEL_VALUE="nimbleTechnology"
-CONTAINER_PORT="8888"
-CHECK_INTERVAL=10 # 10 seconds
-retries=0
-max_retries=50
+# Associative array to store container and port mapping
+declare -A container_port_map
 # Main loop to continuously check for containers and manage port forwarding
 while true; do
     if [ $retries -ge $max_retries ]; then
