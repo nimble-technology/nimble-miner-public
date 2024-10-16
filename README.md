@@ -97,8 +97,7 @@ Download the script using the following commands. This script will read your SSH
 
 Once you’ve downloaded the script, ensure the current user has sudo privileges, execute it (without sudo).
 ```
-wget https://raw.githubusercontent.com/nimble-technology/nimble-miner-public/main/scripts/minerSetup.sh
-wget https://raw.githubusercontent.com/nimble-technology/nimble-miner-public/main/scripts/startMinerSetup.sh
+wget -O startMinerSetup.sh https://raw.githubusercontent.com/nimble-technology/nimble-miner-public/main/scripts/startMinerSetup.sh
 chmod +x startMinerSetup.sh
 ./startMinerSetup.sh
 ```
