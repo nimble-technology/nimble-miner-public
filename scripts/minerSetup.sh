@@ -181,6 +181,7 @@ upload_pub_key(){
           \"gpu_name\": \"$GPU_NAME\",
           \"memory\": \"$GPU_MEMORY\",
           \"uuid\": \"$GPU_UUID\",
+          \"machine_source\": \"$MACHINE_SOURCE\",
           \"ip\": \"$LOCAL_IP\"
         }")
     if echo "$resp" | jq -e '.msg == "upload pub key success"' > /dev/null; then
@@ -197,8 +198,9 @@ if [ $# -lt 3 ]; then
 fi
 
 REMOTE_USER=$1
-HUB_DOMAIN=$3
 PUB_KEY_PATH=$2
+HUB_DOMAIN=$3
+MACHINE_SOURCE=$4
 PUB_KEY=""
 DOCKER_PORT=-1
 LOCAL_IP=$(ip addr show | grep "inet " | grep -v 127.0.0.1 |grep -v docker0 | awk '{print $2}' | cut -d/ -f1)
