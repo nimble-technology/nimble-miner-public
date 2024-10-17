@@ -105,7 +105,7 @@ check_and_setup_userns_remap() {
     # Check if the Docker configuration file exists
     if [ ! -f "$DOCKER_CONFIG_FILE" ]; then
         echo "Docker configuration file does not exist. Creating a new file..."
-        sudo echo -e "{\n  \"userns-remap\": \"default\"\n}" > "$DOCKER_CONFIG_FILE"
+        echo -e "{\n  \"userns-remap\": \"default\"\n}" | sudo tee /etc/docker/daemon.json
         echo "Added 'userns-remap' configuration and restarting Docker service..."
         sudo systemctl restart docker
         return
